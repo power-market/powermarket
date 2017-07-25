@@ -1,5 +1,5 @@
 {
-  "name": "__BONES_NEEDS_A_NAME__",
+  "name": "power-market",
   "version": "0.0.1",
   "description": "A happy little skeleton.",
   "main": "index.js",
@@ -50,6 +50,7 @@
     "check-node-version": "^1.1.2",
     "concurrently": "^3.1.0",
     "cookie-session": "^2.0.0-alpha.1",
+    "debug": "^2.6.8",
     "enzyme": "^2.5.1",
     "express": "^4.14.0",
     "finalhandler": "^1.0.0",
@@ -76,7 +77,7 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.18.0",
-    "babel-eslint": "^7.2.2",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^6.2.7",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.5.1",
