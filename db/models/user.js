@@ -19,10 +19,10 @@ module.exports = db => db.define('users', {
   shippingAddr: Sequelize.STRING,
   email: {
     type: Sequelize.STRING,
+    unique: true,
     validate: {
       isEmail: true,
-      notEmpty: true,
-      unique: true,
+      notEmpty: true
     }
   },
   // We support oauth, so users may or may not have passwords.
@@ -46,9 +46,11 @@ module.exports = db => db.define('users', {
     }
   })
 
-module.exports.associations = (User, { OAuth, Thing, Favorite }) => {
+
+module.exports.associations = (User, { OAuth, Order, Review }) => {
   User.hasOne(OAuth)
-  User.belongsToMany(Thing, { as: 'favorites', through: Favorite })
+  User.hasMany(Order, { as: 'orders' })
+  User.hasMany(Review, { as: 'reviews' })
 }
 
 function setEmailAndPassword(user) {
