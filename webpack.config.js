@@ -1,16 +1,16 @@
 'use strict'
 
 const LiveReloadPlugin = require('webpack-livereload-plugin')
-    , devMode = require('.').isDevelopment
+  , devMode = require('.').isDevelopment
 
-/**
- * Fast source maps rebuild quickly during development, but only give a link
- * to the line where the error occurred. The stack trace will show the bundled
- * code, not the original code. Keep this on `false` for slower builds but
- * usable stack traces. Set to `true` if you want to speed up development.
- */
+  /**
+   * Fast source maps rebuild quickly during development, but only give a link
+   * to the line where the error occurred. The stack trace will show the bundled
+   * code, not the original code. Keep this on `false` for slower builds but
+   * usable stack traces. Set to `true` if you want to speed up development.
+   */
 
-    , USE_FAST_SOURCE_MAPS = false
+  , USE_FAST_SOURCE_MAPS = false
 
 module.exports = {
   entry: './app/main.jsx',
@@ -33,6 +33,6 @@ module.exports = {
     }]
   },
   plugins: devMode
-    ? [new LiveReloadPlugin({appendScriptTag: true})]
+    ? [new LiveReloadPlugin({ appendScriptTag: true })]
     : []
 }
