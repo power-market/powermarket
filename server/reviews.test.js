@@ -2,26 +2,22 @@ const request = require('supertest')
     , {expect} = require('chai')
     , db = require('APP/db')
     , app = require('./start')
-    // , review = require()
+
+    const supertest = require("supertest-as-promised");
 
 
-    const {Review} = db
-
-
-
-// import fsMisc from 'fs-misc';
-// import chaiProperties from 'chai-properties';
-// import chaiThings from 'chai-things';
-// chai.use(chaiProperties);
-// chai.use(chaiThings);
-
-// import sinon from 'sinon';
-
+    const Review = db.model("review");
 
   describe('All them routes', () => {
 
     before('Await database sync', () => db.didSync)
     afterEach('Clear the tables', () => db.truncate({ cascade: true }))
+
+
+        let agent
+        beforeEach("Set up agent for testing", () => {
+            agent = supertest(app);
+        })
 
 
         describe('api routes', () => {
@@ -30,8 +26,8 @@ const request = require('supertest')
             let terriblePower;
             beforeEach('Seed Reviews', () => {
                 const reviews = [
-                    {title: 'Fire Power', text: "Throw fire from my palms", stars: "5"},
-                    {title: 'Ice Power', text: "NOT LIT", stars: "1"}
+                    {title: 'Fire Power', text: "Throw fire from my palms", stars: 5},
+                    {title: 'Ice Power', text: "NOT LIT", stars: 1}
 
                 ];
                 return Review.bulkCreate(reviews, {returning: true})
@@ -45,7 +41,7 @@ const request = require('supertest')
             describe('Reviews', () => {
 
                 it('serves up all users on request to GET /', () => {
-                   request(app)
+                   return agent
                         .get('/api/review')
                         .expect(200)
                         .then(res => {
@@ -57,18 +53,38 @@ const request = require('supertest')
                 });
 
                 it('updates a user at PUT /{{usersId}}, sending a 201 response', () => {
-                    request(app)
+                    return agent
                         .put(`/review/${greatPower}`)
                         .send({
                             text: 'This is hella lit'
                         })
                         .expect(201)
-                        .then(res => {Review.findById(greatPower);
-})
+                        .then(res => {return Review.findById(greatPower);})
                         .then(review => {
                             expect(review.text).to.be.equal('This is hella lit');
                         });
                 });
+
+                it("creates a new Review via a POST request", () => {
+                    return agent
+                        .post("/api/review")
+                        .send({
+                            title: "Throw Rocks Power",
+                            text: "Individual is able to throw rocks at enemies",
+                            stars: 3,
+                        })
+                        .expect(201)
+                        .then(res => {
+                            const newReview = res.body;
+                            return Review.findById(newReview.id)
+                        })
+                        .then(foundReview => {
+                            expect(foundReview.title).to.be.equal("Throw Rocks Power")
+                            expect(foundReview.text).to.be.equal("Individual is able to throw rocks at enemies")
+                            expect(foundReview.stars).to.be.equal(3)
+                        })
+                })
+                
 
             });
 
