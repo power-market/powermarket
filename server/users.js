@@ -44,8 +44,11 @@ module.exports = require('express').Router()
   .put('/:id',
   (req, res, next) =>
     User.findById(req.params.id)
-      .then(user => user.update(req.body))
-      .then(res.sendStatus(200))
+      .then(user => {
+        const update = user.update(req.body)
+        return update
+      })
+      .then(update => res.sendStatus(200))
       .catch(next))
   // not working
   .delete('/:id',
