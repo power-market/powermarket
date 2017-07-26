@@ -20,6 +20,7 @@ module.exports = db => db.define('users', {
   email: {
     type: Sequelize.STRING,
     unique: true,
+    allowNull: false,
     validate: {
       isEmail: true,
       notEmpty: true
@@ -45,8 +46,6 @@ module.exports = db => db.define('users', {
       }
     }
   })
-
-
 module.exports.associations = (User, { OAuth, Order, Review }) => {
   User.hasOne(OAuth)
   User.hasMany(Order, { as: 'orders' })
