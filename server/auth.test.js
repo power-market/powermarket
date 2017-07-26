@@ -1,6 +1,6 @@
 const request = require('supertest')
-const {expect} = require('chai')
-const db = require('APP/db'), {User} = db
+const { expect } = require('chai')
+const db = require('APP/db'), { User } = db
 const app = require('./start')
 
 const alice = {
@@ -28,14 +28,14 @@ describe('/api/auth', () => {
         .expect(302)
         .expect('Set-Cookie', /session=.*/)
         .expect('Location', '/')
-      )
+    )
 
     it('fails with an invalid username and password', () =>
       request(app)
         .post('/api/auth/login/local')
-        .send({username: alice.username, password: 'wrong'})
+        .send({ username: alice.username, password: 'wrong' })
         .expect(401)
-      )
+    )
   })
 
   describe('GET /whoami', () => {
