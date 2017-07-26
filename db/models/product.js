@@ -1,6 +1,6 @@
 'use strict'
 
-const { STRING, INTEGER } = require('sequelize')
+const { STRING, INTEGER, TEXT } = require('sequelize')
 
 module.exports = db => db.define('product', {
   name: {
@@ -15,7 +15,7 @@ module.exports = db => db.define('product', {
     defaultValue: '/default.jpg'
   },
   description: {
-    type: STRING
+    type: TEXT
   },
   price: {
     type: INTEGER,
