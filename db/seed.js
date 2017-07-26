@@ -7,12 +7,12 @@ const db = require('APP/db')
 function seedEverything() {
   const seeded = {
     users: users(),
-    products: products(),
-    reviews: reviews(),
+    products: products()
   }
 
   seeded.orders = orders(seeded)
   seeded.productsInOrder = productsInOrder(seeded)
+  seeded.reviews = reviews(seeded)
 
   return Promise.props(seeded)
 }
@@ -21,7 +21,6 @@ const users = seed(User, {
   brian: {
     email: 'asidsodh@iasodiasd.com',
     name: 'brian',
-    shippingAddr: 'my address!',
     admin: true,
     password: '1234'
   },
@@ -29,7 +28,6 @@ const users = seed(User, {
     name: 'Barack Obama',
     email: 'sjsjs@sjs.sj',
     admin: false,
-    shippingAddr: 'white house',
     password: 'hello'
   },
 })
@@ -55,34 +53,27 @@ const products = seed(Product, {
   },
 })
 
-const reviews = seed(Review, {
-  one: {
-    title: 'WOW',
-    text: 'wow this is so much fun I burned my house down!!',
-    stars: 5,
-    user_id: 1,
-    product_id: 1
-  },
-  two: {
-    title: 'wind sucks',
-    text: 'dont buy overpriced :(',
-    stars: 1,
-    user_id: 2,
-    product_id: 3
-  }
-})
+const reviews = seed(Review,
+  ({ users, products }) => ({
+    'one': {
+      title: 'WOW',
+      text: 'wow this is so much fun I burned my house down!!',
+      stars: 5,
+      user_id: users.barack.id,
+      product_id: products.fire.id
+    },
+    'two': {
+      title: 'wind sucks',
+      text: 'dont buy overpriced :(',
+      stars: 1,
+      user_id: users.brian.id,
+      product_id: products.wind.id
+    }
+  })
+)
 
 const orders = seed(Order,
-  // We're specifying a function here, rather than just a rows object.
-  // Using a function lets us receive the previously-seeded rows (the seed
-  // function does this wiring for us).
-  //
-  // This lets us reference previously-created rows in order to create the join
-  // rows. We can reference them by the names we used above (which is why we used
-  // Objects above, rather than just arrays).
   ({ users }) => ({
-    // The easiest way to seed associations seems to be to just create rows
-    // in the join table.
     'order1': {
       user_id: users.brian.id,    // users.barack is an instance of the User model
       // that we created in the user seed above.
