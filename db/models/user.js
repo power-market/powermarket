@@ -16,14 +16,12 @@ module.exports = db => db.define('users', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  shippingAddr: Sequelize.STRING,
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
     validate: {
-      isEmail: true,
-      notEmpty: true
+      isEmail: true
     }
   },
   // We support oauth, so users may or may not have passwords.

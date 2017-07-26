@@ -37,4 +37,3 @@ module.exports.associations = (Review, { User, Product }) => {
   Review.belongsTo(Product)
   // Product.hasMany(Review)
 }
-
