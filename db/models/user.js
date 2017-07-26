@@ -46,8 +46,9 @@ module.exports = db => db.define('users', {
   })
 module.exports.associations = (User, { OAuth, Order, Review }) => {
   User.hasOne(OAuth)
-  User.hasMany(Order, { as: 'orders' })
+  User.hasMany(Order, { as: 'orders' }) // consider removing as -- KHET
   User.hasMany(Review, { as: 'reviews' })
+  // address table and link  -- KHET
 }
 
 function setEmailAndPassword(user) {

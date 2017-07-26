@@ -12,10 +12,28 @@ const selfOnly = action => (req, res, next) => {
   next()
 }
 
+// assertAdmin -- KHET
+
+// 404 -- not found
+// 401 -- unauthorized -- you have not logged in. Try loggin in
+// 403 -- forbidden -- you are logged. you CANNOT see this
+
+const assertAdmin = (req, res, next) => {
+	if (!req.user) throwError(401, "unauthorized")
+	if (!req.user.admin) throwError(403, "Forbidden")
+	next()
+}
+
+function throwError (status, message) {
+	let err = new Error(message)
+	err.status = status
+	throw err
+}
+
 const forbidden = message => (req, res) => {
   res.status(403).send(message)
 }
 
 // Feel free to add more filters here (suggested: something that keeps out non-admins)
 
-module.exports = {mustBeLoggedIn, selfOnly, forbidden}
+module.exports = {mustBeLoggedIn, selfOnly, forbidden, assertAdmin}

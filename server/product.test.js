@@ -32,7 +32,7 @@ describe('/api/product', () => {
       ]
       return Product.bulkCreate(products, { returning: true })
         .then(createdProduct => {
-          windy = createdProduct[0].id
+          windy = createdProduct[0].id // naming -- windyId -- KHET
           firey = createdProduct[1].id
         })
     })
@@ -44,7 +44,7 @@ describe('/api/product', () => {
         .then(res => {
           expect(res.body).to.be.an('array')
           expect(res.body.length).to.be.equal(2)
-          expect(res.body).to.contain.a.thing.with('id', windy)
+          expect(res.body).to.contain.a.thing.with('id', windy) // look into deep equals object. Windy could be object -- KHET
           expect(res.body).to.contain.a.thing.with('id', firey)
         }))
 
@@ -60,8 +60,8 @@ describe('/api/product', () => {
       it('deletes a specific Product on request to DELETE /{{productId}}', () => agent
         .delete(`/api/product/${windy}`)
         .expect(204)
-        .then(res => Product.findAll({ where: { id: windy } }))
-        .then(product => {
+        .then(res => Product.findAll({ where: { id: windy } })) // findbyid -- KHET
+        .then(product => { // check product is undefined -- KHET
           expect(product).to.be.an('array')
           expect(product.length).to.be.equal(0)
           expect(product).to.not.contain.a.thing.with('id', windy)
@@ -83,7 +83,7 @@ describe('/api/product', () => {
           name: 'icy', imageUrl: 'https://suade.org/images/fire_2.jpg', description: 'shoot some ice', price: 234, count: 1322
         })
         .expect(201)
-        .then(res => {
+        .then(res => { // consider 1 line `=> Product.findById(res.body.id)`
           const createdProduct = res.body
           return Product.findById(createdProduct.id)
         })

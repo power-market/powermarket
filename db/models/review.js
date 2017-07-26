@@ -11,7 +11,7 @@ module.exports = db => db.define('review', {
     }
   },
   text: {
-    type: STRING,
+    type: STRING, // 255 VARCHAR, so consider text -- KHET
     validate: {
       len: {
         args: [20, 1000],

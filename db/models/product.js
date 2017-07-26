@@ -12,7 +12,7 @@ module.exports = db => db.define('product', {
   },
   imageUrl: {
     type: STRING,
-    defaultValue: '/default.jpg'
+    defaultValue: '/default.jpg' // not a url -- KHET
   },
   description: {
     type: TEXT
@@ -20,14 +20,17 @@ module.exports = db => db.define('product', {
   price: {
     type: INTEGER,
     allowNull: false
+    // min value -- KHET
   },
-  count: {
+  count: { // quantity -- KHET
     type: INTEGER,
     allowNull: false
+    // defaultValue of 0 -- KHET
+    // definitely min value -- KHET
   }
 }, {
     getterMethods: {
-      price: function () {
+      price: function () { // make this 1 line OR consider DECIMAL(10,2) -- KHET
         const dollarAmt = this.getDataValue('price') / 100
         return dollarAmt.toFixed(2)
       }
@@ -40,5 +43,6 @@ module.exports = db => db.define('product', {
   })
 
 module.exports.associations = (Product, { Review }) => {
-  Product.hasMany(Review, { as: 'reviews' })
+  Product.hasMany(Review, { as: 'reviews' }) // unnecessary to have `as`. If this was on the belongsTo side it would adjust the foreignKey name -- KHET
+  // some link to orders -- KHET
 }

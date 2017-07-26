@@ -120,7 +120,7 @@ passport.use(new (require('passport-local').Strategy)(
   }
 ))
 
-auth.get('/whoami', (req, res) => res.send(req.user))
+auth.get('/whoami', (req, res) => res.send(req.user)) // consider defaultScope of users to include reviews and orders so you have everything you want on the req.user sent back (so you don't have to make separate API requests each time) -- KHET
 
 // POST requests for local login:
 auth.post('/login/local', passport.authenticate('local', {successRedirect: '/'}))

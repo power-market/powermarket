@@ -5,6 +5,8 @@ const Product = db.model('product')
 
 // const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
+// consider authorization -- KHET
+
 module.exports = require('express').Router()
   .get('/',
   (req, res, next) =>
@@ -29,12 +31,12 @@ module.exports = require('express').Router()
         const update = product.update(req.body)
         return update
       })
-      .then(update => res.sendStatus(200))
+      .then(update => res.sendStatus(200)) // send updated product -- KHET
       .catch(next))
   .delete('/:productId',
   (req, res, next) => {
     const id = req.params.productId
     Product.destroy({ where: { id } })
-      .then(() => res.status(204).end())
+      .then(() => res.status(204).end()) // sendStatus -- KHET
       .catch(next)
   })
