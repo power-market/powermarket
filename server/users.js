@@ -20,6 +20,12 @@ module.exports = require('express').Router()
     User.findAll()
       .then(users => res.json(users))
       .catch(next))
+  .get('/:id',
+  // mustBeLoggedIn,
+  (req, res, next) =>
+    User.findById(req.params.id)
+      .then(user => res.json(user))
+      .catch(next))
   .get('/:id/orders',
   (req, res, next) =>
     Orders.findAll({ where: { user_id: req.params.id } })
@@ -34,12 +40,6 @@ module.exports = require('express').Router()
   (req, res, next) =>
     User.create(req.body)
       .then(user => res.status(201).json(user))
-      .catch(next))
-  .get('/:id',
-  // mustBeLoggedIn,
-  (req, res, next) =>
-    User.findById(req.params.id)
-      .then(user => res.json(user))
       .catch(next))
   .put('/:id',
   (req, res, next) =>
