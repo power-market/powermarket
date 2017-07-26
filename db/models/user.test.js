@@ -1,27 +1,4 @@
-// 'use strict'
-
-// const db = require('APP/db')
-//     , {User} = db
-//     , {expect} = require('chai')
-
-// /* global describe it before afterEach */
-
-// describe('User', () => {
-//   before('Await database sync', () => db.didSync)
-//   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
-
-//   describe('authenticate(plaintext: String) ~> Boolean', () => {
-//     it('resolves true if the password matches', () =>
-//       User.create({ password: 'ok' })
-//         .then(user => user.authenticate('ok'))
-//         .then(result => expect(result).to.be.true))
-
-//     it("resolves false if the password doesn't match", () =>
-//       User.create({ password: 'ok' })
-//         .then(user => user.authenticate('not ok'))
-//         .then(result => expect(result).to.be.false))
-//   })
-// })
+'use strict'
 
 const request = require('supertest')
   , db = require('APP/db')
@@ -37,14 +14,10 @@ import sinon from 'sinon'
 
 const User = db.model('users')
 
-/* global describe it before afterEach */
-
 describe('User model', () => {
   before('Await database sync', () => db.didSync)
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
-  // *Assertion translation*:
-  // This assertion expects that the User model will
-  // put an `email` column in the users table.
+
   it('has the expected email definition', () => {
     expect(User.attributes.email).to.be.an('object')
   })
@@ -54,8 +27,7 @@ describe('User model', () => {
   })
 
   describe('validations', () => {
-    // *Assertion translation*:
-    // The `email` column should be a required field.
+
     it('require email', () => {
       const user = User.build({ name: 'Brian' })
       return user.validate()
@@ -95,8 +67,7 @@ describe('User model', () => {
           biden = createdUsers[1].id
         })
     })
-    // *Assertion translation*:
-    // The `email` column should be a required field.
+
     it('defaults admin to false unless specified', () => {
       User.findById(biden)
         .then(res => {
@@ -110,21 +81,3 @@ describe('User model', () => {
   })
 })
 
-  // describe('functionality', () => {
-
-  //   let brianId;
-  //   let kateId;
-
-  //   beforeEach('Seed users', () => {
-  //     const users = [
-  //       { name: 'brian', email: 'brian@brian.com' },
-  //       { name: 'kate', email: 'kate@fullstack.com' }
-  //     ];
-  //     return User.bulkCreate(users, { returning: true })
-  //       .then(createdUsers => {
-  //         brianId = createdUsers[0].id;
-  //         kateId = createdUsers[1].id;
-  //       });
-  //   });
-
-  // });
