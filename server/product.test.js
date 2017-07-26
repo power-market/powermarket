@@ -52,7 +52,6 @@ describe('/api/product', () => {
         .get(`/api/product/${windy}`)
         .expect(200)
         .then(res => {
-          console.log('this is body', res.body)
           expect(res.body.name).to.be.equal('windy')
           expect(res.body.description).to.be.equal('shoot some wind')
           expect(res.body.price).to.be.equal('123.00')
