@@ -2,6 +2,8 @@
 
 const db = require('APP/db')
 const User = db.model('users')
+const Orders = db.model('order')
+const Reviews = db.model('review')
 
 // const { mustBeLoggedIn, forbidden } = require('./auth.filters')
 
@@ -18,6 +20,16 @@ module.exports = require('express').Router()
     User.findAll()
       .then(users => res.json(users))
       .catch(next))
+  .get('/:id/orders',
+  (req, res, next) =>
+    Orders.findAll({ where: { user_id: req.params.id } })
+      .then(orders => res.json(orders)
+        .catch(next)))
+  .get('/:id/reviews',
+  (req, res, next) =>
+    Reviews.findAll({ where: { user_id: req.params.id } })
+      .then(reviews => res.json(reviews)
+        .catch(next)))
   .post('/',
   (req, res, next) =>
     User.create(req.body)
