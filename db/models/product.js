@@ -1,6 +1,6 @@
 'use strict'
 
-const { STRING, INTEGER, TEXT } = require('sequelize')
+const { STRING, INTEGER, TEXT, DECIMAL } = require('sequelize')
 
 module.exports = db => db.define('product', {
   name: {
@@ -12,33 +12,28 @@ module.exports = db => db.define('product', {
   },
   imageUrl: {
     type: STRING,
-    defaultValue: '/default.jpg'
+    validate: {
+      isUrl: true
+    }
   },
   description: {
     type: TEXT
   },
   price: {
-    type: INTEGER,
+    type: DECIMAL(10, 2),
     allowNull: false
   },
-  count: {
+  quantity: {
     type: INTEGER,
-    allowNull: false
-  }
-}, {
-    getterMethods: {
-      price: function () {
-        const dollarAmt = this.getDataValue('price') / 100
-        return dollarAmt.toFixed(2)
-      }
-    },
-    setterMethods: {
-      price: function (dollars) {
-        this.setDataValue('price', dollars * 100)
-      }
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: 0
     }
-  })
+  }
+})
 
-module.exports.associations = (Product, { Review }) => {
-  Product.hasMany(Review, { as: 'reviews' })
+module.exports.associations = (Product, { Review, ProductsInOrder }) => {
+  Product.hasMany(Review)
+  Product.belongsTo(ProductsInOrder)
 }

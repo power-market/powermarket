@@ -8,3 +8,7 @@ module.exports = db => db.define('order', {
     defaultValue: 'processing'
   }
 })
+
+module.exports.associations = (Order, { ProductsInOrder }) => {
+  Order.belongsTo(ProductsInOrder)
+}
