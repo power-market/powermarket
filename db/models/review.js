@@ -1,6 +1,6 @@
 'use strict'
 
-const { STRING, INTEGER, NOW, DATE } = require('sequelize')
+const { STRING, INTEGER, NOW, DATE, TEXT } = require('sequelize')
 
 module.exports = db => db.define('review', {
   title: {
@@ -11,7 +11,7 @@ module.exports = db => db.define('review', {
     }
   },
   text: {
-    type: STRING,
+    type: TEXT,
     validate: {
       len: {
         args: [20, 1000],
