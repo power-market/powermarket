@@ -23,8 +23,8 @@ describe('/api/product', () => {
   })
 
   describe('api routes', () => {
-    let windy
-    let firey
+    let windyId
+    let fireyId
     beforeEach('Seed products', () => {
       const products = [
         { name: 'windy', imageUrl: 'http://weknowyourdreams.com/images/wind/wind-01.jpg', description: 'shoot some wind', price: 123, count: 13 },
@@ -32,8 +32,8 @@ describe('/api/product', () => {
       ]
       return Product.bulkCreate(products, { returning: true })
         .then(createdProduct => {
-          windy = createdProduct[0].id
-          firey = createdProduct[1].id
+          windyId = createdProduct[0].id
+          fireyId = createdProduct[1].id
         })
     })
 
@@ -44,12 +44,12 @@ describe('/api/product', () => {
         .then(res => {
           expect(res.body).to.be.an('array')
           expect(res.body.length).to.be.equal(2)
-          expect(res.body).to.contain.a.thing.with('id', windy)
-          expect(res.body).to.contain.a.thing.with('id', firey)
+          expect(res.body).to.contain.a.thing.with('id', windyId)
+          expect(res.body).to.contain.a.thing.with('id', fireyId)
         }))
 
       it('serves up a specific Product on request to GET /{{productId}}', () => agent
-        .get(`/api/product/${windy}`)
+        .get(`/api/product/${windyId}`)
         .expect(200)
         .then(res => {
           console.log('this is body', res.body)
@@ -59,20 +59,20 @@ describe('/api/product', () => {
         }))
 
       it('deletes a specific Product on request to DELETE /{{productId}}', () => agent
-        .delete(`/api/product/${windy}`)
+        .delete(`/api/product/${windyId}`)
         .expect(204)
-        .then(res => Product.findAll({ where: { id: windy } }))
+        .then(res => Product.findAll({ where: { id: windyId } }))
         .then(product => {
           expect(product).to.be.an('array')
           expect(product.length).to.be.equal(0)
-          expect(product).to.not.contain.a.thing.with('id', windy)
+          expect(product).to.not.contain.a.thing.with('id', windyId)
         }))
 
       it('updates a specific Product on request to PUT /{{productId}}', () => agent
-        .put(`/api/product/${firey}`)
+        .put(`/api/product/${fireyId}`)
         .send({ price: 1334 })
         .expect(200)
-        .then(res => Product.findById(firey))
+        .then(res => Product.findById(fireyId))
         .then(foundProduct => {
           expect(foundProduct.price).to.be.equal('1334.00')
           expect(foundProduct.name).to.be.equal('firey')
