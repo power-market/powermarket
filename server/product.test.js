@@ -14,7 +14,7 @@ const Product = db.model('product')
 
 /* global describe it before afterEach */
 
-describe('/api/product', () => {
+describe('Backend', () => {
   before('Await database sync', () => db.didSync)
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
   let agent
@@ -22,7 +22,7 @@ describe('/api/product', () => {
     agent = supertest(app)
   })
 
-  describe('api routes', () => {
+  describe('routes', () => {
     let windyId
     let fireyId
     beforeEach('Seed products', () => {
@@ -37,7 +37,7 @@ describe('/api/product', () => {
         })
     })
 
-    describe('products', () => {
+    describe('for products', () => {
       it('serves up all products on request to GET /', () => agent
         .get('/api/product/')
         .expect(200)
