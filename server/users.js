@@ -5,56 +5,59 @@ const User = db.model('users')
 const Orders = db.model('order')
 const Reviews = db.model('review')
 
-// const { mustBeLoggedIn, forbidden } = require('./auth.filters')
+const { mustBeLoggedIn, selfOnly, assertAdmin, selfOrAdmin } = require('./auth.filters')
 
 module.exports = require('express').Router()
-  .get('/',
-  // The forbidden middleware will fail *all* requests to list users.
-  // Remove it if you want to allow anyone to list all users on the site.
-  //
-  // If you want to only let admins list all the users, then you'll
-  // have to add a role column to the users table to support
-  // the concept of admin users.
-  // forbidden('listing users is not allowed'),
-  (req, res, next) =>
+  .param('id',
+  (req, res, next, id) => {
+    User.findById(id)
+      .then(user => {
+        if (!user) res.sendStatus(404)
+        req.requestedUser = user
+        next()
+        return null
+      })
+      .catch(next)
+  })
+  .get('/', assertAdmin,
+  (req, res, next) => {
     User.findAll()
       .then(users => res.json(users))
-      .catch(next))
-  .get('/:id',
-  // mustBeLoggedIn,
-  (req, res, next) =>
-    User.findById(req.params.id)
-      .then(user => res.json(user))
-      .catch(next))
-  .get('/:id/orders',
-  (req, res, next) =>
-    Orders.findAll({ where: { user_id: req.params.id } })
-      .then(orders => res.json(orders)
-        .catch(next)))
-  .get('/:id/reviews',
-  (req, res, next) =>
-    Reviews.findAll({ where: { user_id: req.params.id } })
-      .then(reviews => res.json(reviews)
-        .catch(next)))
-  .post('/',
+      .catch(next)
+  })
+  .get('/:id', mustBeLoggedIn, selfOrAdmin,
+  (req, res, next) => {
+    res.json(req.requestedUser)
+      .catch(next)
+  })
+  // .get('/:id/orders',
+  // (req, res, next) =>
+  //   Orders.findAll({ where: { user_id: req.params.id } })
+  //     .then(orders => res.json(orders)
+  //       .catch(next)))
+  // .get('/:id/reviews',
+  // (req, res, next) =>
+  //   Reviews.findAll({ where: { user_id: req.params.id } })
+  //     .then(reviews => res.json(reviews)
+  //       .catch(next)))
+  .post('/', assertAdmin,
   (req, res, next) =>
     User.create(req.body)
       .then(user => res.status(201).json(user))
       .catch(next))
-  .put('/:id',
-  (req, res, next) =>
-    User.findById(req.params.id)
-      .then(user => {
-        const update = user.update(req.body)
-        return update
-      })
-      .then(update => res.sendStatus(200))
-      .catch(next))
-  // not working
-  .delete('/:id',
+  .put('/:id', selfOrAdmin,
   (req, res, next) => {
-    const id = req.params.id
-    User.destroy({ where: { id } })
-      .then(() => res.status(204).end())
+    req.requestedUser.update(req.body)
+      .then(user => {
+        res.json(user)
+      })
+      .catch(next)
+  })
+  .delete('/:id', selfOrAdmin,
+  (req, res, next) => {
+    req.requestedUser.destroy()
+      .then(() => {
+        res.sendStatus(204)
+      })
       .catch(next)
   })
