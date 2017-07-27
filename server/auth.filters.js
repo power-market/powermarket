@@ -1,21 +1,30 @@
 const mustBeLoggedIn = (req, res, next) => {
-  if (!req.user) {
-    return res.status(401).send('You must be logged in')
-  }
+  if (!req.user) throwError(401, 'Unauthorized')
   next()
 }
 
 const selfOnly = action => (req, res, next) => {
-  if (req.params.id !== req.user.id) {
-    return res.status(403).send(`You can only ${action} yourself.`)
+  if (req.params.id !== req.user.id) throwError(403, `You can only ${action} yourself.`)
+  next()
+}
+
+const selfOrAdmin = action => (req, res, next) => {
+  if (!req.user.admin) {
+    if (req.params.id !== req.user.id) throwError(403, `You can only ${action} yourself or as admin.`)
   }
   next()
 }
 
-const forbidden = message => (req, res) => {
-  res.status(403).send(message)
+const assertAdmin = (req, res, next) => {
+  if (!req.user) throwError(401, 'Unauthorized')
+  if (!req.user.admin) throwError(403, 'Forbidden')
+  next()
 }
 
-// Feel free to add more filters here (suggested: something that keeps out non-admins)
+const throwError = (status, message) => {
+  const err = new Error(message)
+  err.status = status
+  throw err
+}
 
-module.exports = {mustBeLoggedIn, selfOnly, forbidden}
+module.exports = { mustBeLoggedIn, selfOnly, assertAdmin, selfOrAdmin }
