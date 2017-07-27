@@ -7,29 +7,34 @@ const Product = db.model('product')
 
 module.exports = require('express').Router()
   .get('/',
-    (req, res, next) =>
-      Product.findAll()
-        .then(product => res.json(product))
-        .catch(next))
+  (req, res, next) =>
+    Product.findAll()
+      .then(product => res.json(product))
+      .catch(next))
   .post('/',
-    (req, res, next) =>
-      Product.create(req.body)
+  (req, res, next) =>
+    Product.create(req.body)
       .then(user => res.status(201).json(user))
       .catch(next))
   .get('/:productId',
-    (req, res, next) =>
-      Product.findById(req.params.productId)
+  (req, res, next) =>
+    Product.findById(req.params.productId)
       .then(product => res.json(product))
       .catch(next))
 
-  .put('/:productId', (req, res, next) => {
-      Product.findById(req.params.productId)
-      .then((foundProduct) => {
-        return foundProduct.update(req.body);
+  .put('/:id',
+  (req, res, next) =>
+    Product.findById(req.params.id)
+      .then(product => {
+        const update = product.update(req.body)
+        return update
       })
-      .then((updatedProduct) => {
-        res.json(updatedProduct).sendStatus(201)
-      })
+      .then(update => res.sendStatus(200))
+      .catch(next))
+  .delete('/:productId',
+  (req, res, next) => {
+    const id = req.params.productId
+    Product.destroy({ where: { id } })
+      .then(() => res.status(204).end())
       .catch(next)
   })
-
