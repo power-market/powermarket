@@ -22,14 +22,15 @@ module.exports = require('express').Router()
       .then(product => res.json(product))
       .catch(next))
 
-  .put('/:productId', (req, res, next) => {
-    Product.findById(req.params.productId)
-      .then((foundProduct) => foundProduct.update(req.body))
-      .then((updatedProduct) => {
-        res.json(updatedProduct).sendStatus(201)
+  .put('/:id',
+  (req, res, next) =>
+    Product.findById(req.params.id)
+      .then(product => {
+        const update = product.update(req.body)
+        return update
       })
-      .catch(next)
-  })
+      .then(update => res.sendStatus(200))
+      .catch(next))
   .delete('/:productId',
   (req, res, next) => {
     const id = req.params.productId
