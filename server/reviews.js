@@ -15,8 +15,8 @@ module.exports = require('express').Router()
   // the concept of admin users.
   // forbidden('listing users is not allowed'),
   (req, res, next) =>
-    User.findAll()
-      .then(reviews => res.json(reviews))
+    Review.findAll()
+      .then(reviews => res.status(201).json(reviews))
       .catch(next))
   .post('/',
   (req, res, next) =>
@@ -33,13 +33,13 @@ module.exports = require('express').Router()
   (req, res, next) =>
     Review.findById(req.params.id)
       .then(review => {return review.update(req.body)})
-      .then(res.sendStatus(200))
+      .then(res.sendStatus(201))
       .catch(next))
   // not working
   .delete('/:id',
   (req, res, next) => {
     const id = req.params.id
-    User.destroy({ where: { id } })
+  Review.destroy({ where: { id } })
       .then(() => res.status(204).end())
       .catch(next)
   })

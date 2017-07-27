@@ -1,4 +1,4 @@
-const request = require('supertest')
+const request = require('supertest') 
     , {expect} = require('chai')
     , db = require('APP/db')
     , app = require('./start')
