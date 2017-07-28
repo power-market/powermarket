@@ -1,47 +1,39 @@
 import React, { Component } from 'react'
 import Review from './Review'
+import { fetchProducts } from '../reducers/product'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import _ from 'lodash'
-import { } from '../store'
-
-/* Displays all the information within the campus view page.
-This includes deleting/updating campus info, adding a new student,
-or adding an exisiting student from another campus. */
 
 /* -----------------    COMPONENT     ------------------ */
 
-class ProductView extends Component {
-
-  constructor(props) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-  }
-
-  handleChange(event) {
-
-  }
-
+class SingleProduct extends Component {
   render() {
     const { product, reviews } = this.props
     const filteredReviews = reviews.filter(review => review.product_id === product.id)
+    const stars = () => {
+      if (!filteredReviews.length) return 'No Reviews'
+      let sum = 0
+      filteredReviews.forEach(review => {
+        sum += review.stars
+      })
+      return 'Rated' + sum / filteredReviews.length + 'out of 5'
+    }
     return (
       <div>
         <div>
           <h2 className="title">{product.name}</h2>
+          <h3 className="title">{product.price}</h3>
+          <h4>{stars()}</h4>
           <br />
           <div className="photoCard">
             <img width="200" height="200" src={product.imageUrl} />
           </div>
           <br />
-          <h4>Product Description</h4>
+          <h4>Description</h4>
           <div className="signin-container">
             <div className="buffer local">
+              <p>{product.description}</p>
             </div>
           </div>
         </div>
@@ -57,7 +49,7 @@ class ProductView extends Component {
           </div>
           <br />
           <h4>Write a Review</h4>
-          <NewReview />
+          <ReviewForm />
           <br />
         </div>
       </div>
@@ -68,15 +60,15 @@ class ProductView extends Component {
 /* -----------------    CONTAINER     ------------------ */
 
 const mapStateToProps = ({ products, reviews }, ownProps) => {
-  const paramId = Number(ownProps.match.params.campusId)
+  const paramId = Number(ownProps.match.params.productId)
   return {
     product: _.find(products, product => product.id === paramId),
     reviews: reviews
   }
-};
+}
 
-const mapDispatch = {}
+// const mapDispatch = {}
 
 export default withRouter(connect(
-  mapStateToProps, mapDispatch
-)(ProductView))
+  mapStateToProps
+)(SingleProduct))
