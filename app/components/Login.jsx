@@ -14,7 +14,7 @@ export class Login extends React.Component{
   }
    onSignupSubmit = evt => {
       evt.preventDefault()
-      login(evt.target.username.value, evt.target.password.value)
+      this.props.login(evt.target.username.value, evt.target.password.value)
    }
 
   render(){
