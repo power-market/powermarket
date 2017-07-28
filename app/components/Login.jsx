@@ -19,10 +19,10 @@ export class Login extends React.Component{
    
   render(){
     return(
-        <form onSubmit={}>
-          <input name="username" onChange = {changeUsername} />
-          <input name="password" type="password" onChange = {changePassword} />
-          <input type="submit" value="Login" onSubmit={onSignupSubmit}/>
+        <form onSubmit={this.onSignupSubmit}>
+          <input name="username" />
+          <input name="password" type="password"/>
+          <input type="submit" value="Login"/>
         </form>
     )
 }
