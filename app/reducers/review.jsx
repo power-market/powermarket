@@ -37,7 +37,7 @@ export const fetchReviews = (reviews) => {
         reviews.filter(() => { product_id })
         dispatch(getReview(reviews))
       })
-  }
+  }}
   export const createNewReview = (review) => {
     return function (dispatch) {
       axios.post('api/reviews/', taco)
@@ -47,5 +47,5 @@ export const fetchReviews = (reviews) => {
         })
     }
   }
-}
+
 export default reducer; 
