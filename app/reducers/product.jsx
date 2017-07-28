@@ -1,29 +1,29 @@
 import axios from "axios";
 
-const GET_ALL_ITEMS = "GET_ALL_ITEMS"
+const GET_PRODUCTS = "GET_PRODUCTS"
 
-export const getAllItems = (products) => {
+export const getProducts = (products) => {
     return {
-        type: GET_ALL_ITEMS,
+        type: GET_PRODUCTS,
         products
     }
 }
 
 export default function reduce(products = [], action){
     switch(action.type){
-        case GET_ALL_ITEMS:
+        case GET_PRODUCTS:
             return action.products;
         default:
             return products;
     }
 }
 //thunk
-export function getThings(){
+export function fetchProducts(){
     return function(dispatch){
         axios.get('/api/product/')
         .then(res => res.data)
         .then((allProducts) => {
-            var allTheProducts = getAllItems(allProducts)
+            var allTheProducts = fetchProducts(allProducts)
             console.log("ALL THE PRODUCTS -------------------------> ", allProducts);
             return dispatch(allTheProducts);
         })

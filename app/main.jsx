@@ -24,13 +24,22 @@ const ExampleApp = connect(
 )(
   ({ user, children }) =>
     <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
+         <nav className="navbar navbar-inverse">
+          <div className="container-fluid">
+              <div className="navbar-header">
+              <a className="navbar-brand" href = "/" style = {{color: "orange"}} >Power Market</a>
+              </div>
+              <ul className="nav navbar-nav">
+              <li className="active"><a href="/">Your Cart</a></li>
+              <li className ="col-xs-2 col-xs-offset-4">{user ? <WhoAmI/> : <Login/>}</li>
+              </ul>
+
+          </div>
       </nav>
       <main>
         <Switch>
           {/* <Route path="/jokes" component={Jokes} /> */}
-          <Route exact path = "/main-page" component = {Main} />
+          <Route exact path = "/" component = {Main} />
           <Route component={NotFound} />
         </Switch>
       </main>

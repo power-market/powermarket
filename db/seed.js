@@ -35,18 +35,21 @@ const users = seed(User, {
 const products = seed(Product, {
   fire: {
     name: 'fire',
+    imageUrl: 'https://c1.staticflickr.com/5/4004/5164132293_aa7453ce3a_b.jpg',
     description: 'shoot fire out of palms',
     price: 12393,
     count: 10,
   },
   ice: {
     name: 'ice',
+    imageUrl: 'https://i.ytimg.com/vi/BwZlVwfz4UY/maxresdefault.jpg',
     description: 'shoot ice out of palms',
     price: 162,
     count: 10101,
   },
   wind: {
     name: 'wind',
+    imageUrl: "http://static.tvtropes.org/pmwiki/pub/images/Funnel_5498.jpg",
     description: 'shoot wind out of palms',
     price: 101,
     count: 1,
