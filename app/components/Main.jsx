@@ -74,7 +74,6 @@ export class Main extends Component {
             search: state.search
         }
     }
-}
 
 const mapDispatchToProps = {
     fetchProducts
