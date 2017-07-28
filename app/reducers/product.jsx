@@ -1,32 +1,30 @@
-import axios from "axios";
+import axios from 'axios'
 
-const GET_ALL_ITEMS = "GET_ALL_ITEMS"
+const GET_PRODUCTS = "GET_PRODUCTS"
+const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
+const WRITE_PRODUCT = 'WRITE_PRODUCT'
+const ADD_PRODUCT = 'ADD_PRODUCT'
+const GET_PRODUCT = 'GET_PRODUCT'
 
-export const getAllItems = (products) => {
-    return {
-        type: GET_ALL_ITEMS,
-        products
-    }
-}
+export const getProducts = products => ({ type: GET_PRODUCTS, products })
+export const getProduct = product => ({ type: GET_PRODUCT, product })
 
-export default function reduce(products = [], action){
-    switch(action.type){
-        case GET_ALL_ITEMS:
-            return action.products;
-        default:
-            return products;
-    }
-}
-//thunk
-export function getThings(){
-    return function(dispatch){
-        axios.get('/api/product/')
+// thunk
+export const getThings = () => dispatch => {
+    axios.get('/api/products')
         .then(res => res.data)
-        .then((allProducts) => {
-            var allTheProducts = getAllItems(allProducts)
-            console.log("ALL THE PRODUCTS -------------------------> ", allProducts);
-            return dispatch(allTheProducts);
+        .then(products => {
+            const action = getProducts(products)
+            dispatch(action)
         })
-    }
 }
 
+export default function reduce(products = [], action) {
+    switch (action.type) {
+        case GET_PRODUCTS:
+            return action.products
+        default:
+            return products
+    }
+}
