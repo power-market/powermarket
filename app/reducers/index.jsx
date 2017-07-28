@@ -5,6 +5,5 @@ const rootReducer = combineReducers({
   products: require('./product').default,
   search: require('./search').default,
   review: require('./review').default
-
 })
 export default rootReducer

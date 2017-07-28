@@ -35,7 +35,6 @@ const ExampleApp = connect(
               <li className="active"><a href="/">Your Cart</a></li>
               <li className ="col-xs-2 col-xs-offset-4">{user ? <WhoAmI/> : <Login/>}</li>
               </ul>
-
           </div>
           <SearchBar />
       </nav>
