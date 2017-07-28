@@ -11,7 +11,7 @@ export const getProducts = products => ({ type: GET_PRODUCTS, products })
 export const getProduct = product => ({ type: GET_PRODUCT, product })
 
 // thunk
-export const getThings = () => dispatch => {
+export const fetchProducts = () => dispatch => {
     axios.get('/api/products')
         .then(res => res.data)
         .then(products => {
