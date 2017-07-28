@@ -18,6 +18,8 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Main from "./components/Main"
+import SearchBar from "./components/SearchBar"
+
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -35,10 +37,10 @@ const ExampleApp = connect(
               </ul>
 
           </div>
+          <SearchBar />
       </nav>
       <main>
         <Switch>
-          {/* <Route path="/jokes" component={Jokes} /> */}
           <Route exact path = "/" component = {Main} />
           <Route component={NotFound} />
         </Switch>
