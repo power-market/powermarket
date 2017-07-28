@@ -4,13 +4,32 @@ import { fetchProducts } from "../reducers/product"
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom"
 
+import Search from "../reducers/search"
+
 export class Main extends Component {
-    componentWillMount() {
+    constructor(props){
+        super(props);
+        this.state ={
+            allProducts: props.products
+        }
+        this.compareSearchStoreToProductStore = this.compareSearchStoreToProductStore.bind(this)
+    }
+
+    componentWillMount(){
         this.props.fetchProducts()
     }
-    render() {
+    compareSearchStoreToProductStore(){
+        if(this.props.search.length)
+            this.setState({allProducts: this.props.search});
+    }
+        
+    
+    render(){ 
+           var displayItems = [];
+           this.props.search.length > 0  ?  displayItems = this.props.search : displayItems = this.props.products;
+           console.log(displayItems);
 
-        return (
+        return(     
             <div>
 
                 <div className="row">
@@ -25,20 +44,20 @@ export class Main extends Component {
 
                 <div className="row">
 
-                    {
-                        this.props.products.map(eachProduct => {
-                            return (
-                                <div className="col-xs-4" key={eachProduct.id}>
-                                    <Link className="thumbnail" to={`/`}>
-                                        <img src={eachProduct.imageUrl} className="img-thumbnail" style={{ height: '250px', width: '700px' }} />
-                                        <div className="caption">
-                                            <h5>
-                                                <span>{eachProduct.name}</span>
-                                            </h5>
-                                        </div>
-                                    </Link>
-                                </div>)
-                        })
+           {
+            displayItems.map(eachProduct => {
+            return (
+            <div className="col-xs-4" key={ eachProduct.id }>
+                <Link className = "thumbnail" to = {`/`}>
+                <img src={ eachProduct.imageUrl } className = "img-thumbnail" style = {{height: '250px', width: '700px'}}/>
+                <div className="caption">
+                  <h5>
+                    <span>{ eachProduct.name }</span>
+                  </h5>
+                </div>
+                </Link>
+            </div>)
+           })
 
                     }
 
@@ -49,9 +68,11 @@ export class Main extends Component {
 
     }
 }
-const mapStateToProps = function (state) {
-    return {
-        products: state.products
+   const mapStateToProps = function(state){
+        return {
+            products: state.products,
+            search: state.search
+        }
     }
 }
 
