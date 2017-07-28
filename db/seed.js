@@ -19,14 +19,14 @@ function seedEverything() {
 
 const users = seed(User, {
   brian: {
-    email: 'asidsodh@iasodiasd.com',
+    email: 'brian@brian.com',
     name: 'brian',
     admin: true,
     password: '1234'
   },
   barack: {
     name: 'Barack Obama',
-    email: 'sjsjs@sjs.sj',
+    email: 'obama@whitehouse.gov',
     admin: false,
     password: 'hello'
   },

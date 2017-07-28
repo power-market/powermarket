@@ -8,9 +8,9 @@
 import 'babel-polyfill'
 
 import React from 'react'
-import {render} from 'react-dom'
-import {Provider, connect} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import { render } from 'react-dom'
+import { Provider, connect } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import store from './store'
 import Jokes from './components/Jokes'
@@ -41,11 +41,12 @@ const ExampleApp = connect(
       <main>
         <Switch>
           <Route exact path = "/" component = {Main} />
+
           <Route component={NotFound} />
         </Switch>
       </main>
     </div>
-)
+  )
 
 render(
   <Provider store={store}>

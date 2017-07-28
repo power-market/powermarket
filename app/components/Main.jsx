@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import Products from "../reducers/product";
-import {fetchProducts} from "../reducers/product";
-import {connect} from 'react-redux'
-import {Link} from "react-router-dom"
+import Products from "../reducers/product"
+import { fetchProducts } from "../reducers/product"
+import { connect } from 'react-redux'
+import { Link } from "react-router-dom"
 
 import Search from "../reducers/search"
 
 export class Main extends Component {
-
     constructor(props){
         super(props);
         this.state ={
@@ -33,17 +32,17 @@ export class Main extends Component {
         return(     
             <div>
 
-             <div className = "row">
-                <div className = "col-xs-6">
-                    <h3>Powers</h3>
+                <div className="row">
+                    <div className="col-xs-6">
+                        <h3>Powers</h3>
+                    </div>
+                    <div className="col-xs-2 col-xs-offset-4">
+                        <button type="button" className="btn btn-primary"> Add a Super Power </button>
+                    </div>
                 </div>
-                <div className = "col-xs-2 col-xs-offset-4">
-                    <button type="button" className="btn btn-primary"> Add a Super Power </button>
-                </div>
-             </div>
 
 
-            <div className = "row">
+                <div className="row">
 
            {
             displayItems.map(eachProduct => {
@@ -60,12 +59,12 @@ export class Main extends Component {
             </div>)
            })
 
-           }
+                    }
 
-             </div>
+                </div>
 
-             </div>
-             )
+            </div>
+        )
 
     }
 }
@@ -75,10 +74,11 @@ export class Main extends Component {
             search: state.search
         }
     }
+}
 
-    const mapDispatchToProps = {
-        fetchProducts
-    }
+const mapDispatchToProps = {
+    fetchProducts
+}
 
 
 
