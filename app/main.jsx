@@ -17,6 +17,7 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
+import Main from "./components/Main"
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -28,8 +29,8 @@ const ExampleApp = connect(
       </nav>
       <main>
         <Switch>
-          <Route path="/jokes" component={Jokes} />
-          <Redirect exact from="/" to="/jokes" />
+          {/* <Route path="/jokes" component={Jokes} /> */}
+          <Route exact path = "/main-page" component = {Main} />
           <Route component={NotFound} />
         </Switch>
       </main>
