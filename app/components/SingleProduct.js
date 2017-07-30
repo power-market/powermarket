@@ -10,6 +10,7 @@ import _ from 'lodash'
 class SingleProduct extends Component {
   render() {
     const { product, reviews } = this.props
+    console.log(this.props)
     const filteredReviews = reviews.filter(review => review.product_id === product.id)
     const stars = () => {
       if (!filteredReviews.length) return 'No Reviews'
@@ -59,11 +60,12 @@ class SingleProduct extends Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapStateToProps = ({ products, reviews }, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   const paramId = Number(ownProps.match.params.productId)
+  console.log(state.products)
   return {
-    product: _.find(products, product => product.id === paramId),
-    reviews: reviews
+    product: _.find(state.products, product => product.id === paramId),
+    reviews: state.reviews
   }
 }
 

@@ -22,14 +22,13 @@ export class Main extends Component {
                     </div>
                 </div>
 
-
                 <div className="row">
 
                     {
                         this.props.products.map(eachProduct => {
                             return (
                                 <div className="col-xs-4" key={eachProduct.id}>
-                                    <Link className="thumbnail" to={`/`}>
+                                    <Link className="thumbnail" to={`/products/${eachProduct.id}`}>
                                         <img src={eachProduct.imageUrl} className="img-thumbnail" style={{ height: '250px', width: '700px' }} />
                                         <div className="caption">
                                             <h5>
