@@ -5,11 +5,15 @@ import { withRouter } from 'react-router'
 
 /* -----------------    COMPONENT     ------------------ */
 
+/* KH/ET: If just rendering some JSX, consider not using a class but just a function that spits out JSX */
+
 class SingleProduct extends Component {
   render() {
     const { products, reviews, paramId } = this.props
-    const filteredProduct = products.filter(product => product.id === paramId)
-    const filteredReviews = reviews.filter(review => review.product_id === filteredProduct.id)
+    const filteredProduct = products.filter(product => product.id === paramId) // KH/ET: Make a compelling argument for doing this!
+    const filteredReviews = reviews.filter(review => review.product_id === filteredProduct.id) // KH/ET: Same here -- why grab all reviews for every product and filter down? Consider setting association so products come with their reviews
+
+    /* KH/ET: Consider moving stars generation to the models. Look into a hook. */
     const stars = () => {
       if (!filteredReviews.length) return 'No Reviews'
       let sum = 0
@@ -18,11 +22,13 @@ class SingleProduct extends Component {
       })
       return 'Rated' + sum / filteredReviews.length + 'out of 5'
     }
+
     return (
       <div style={{ marginLeft: 5 + 'em' }}>
         <div>
+          {/* KH/ET: Consider "product && product.name" */}
           <h1 className="title">{filteredProduct[0] && filteredProduct[0].name}</h1>
-          
+
 
           <form className="form-inline">
           <fieldset>

@@ -12,6 +12,8 @@ export class Main extends Component {
         var displayItems = []
         this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products
 
+        /* KH/ET: var displayItems = this.props.search.length > 0 ? this.props.search : this.props.products */
+
         return (
             <div>
                 <div className="row">

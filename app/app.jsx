@@ -18,14 +18,14 @@ import SideBar from "./components/SideBar"
 
 class App extends Component {
   componentWillReceiveProps() {
-    this.props.fetchInitialData()
+    this.props.fetchInitialData() // KH/ET: Seems this should go in a componentWillMount (should run once)
   }
 
   render() {
     const { user, children } = this.props
     return (
       <div>
-       <SideBar />
+        <SideBar />
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -40,8 +40,8 @@ class App extends Component {
         </nav>
         <main>
           <Switch>
-            <Route path='/products/:productId' component={SingleProduct} />
             <Route exact path="/" component={Main} />
+            <Route path='/products/:productId' component={SingleProduct} />
             <Route component={NotFound} />
           </Switch>
         </main>

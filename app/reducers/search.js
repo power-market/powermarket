@@ -32,7 +32,7 @@ export const filterProducts = (searchedItem) => dispatch => {
     .then(products => {
       var filteredProducts = []
       products.forEach(eachProduct => {
-        console.log(eachProduct)
+        console.log(eachProduct) //KH/ET: KEEP CONSOLE.LOGS OUT OF MASTER!
         if (eachProduct.name.includes(searchedItem) && searchedItem.length > 1)
           filteredProducts.push(eachProduct)
       })
