@@ -1,14 +1,22 @@
 'use strict'
 
-const { ENUM } = require('sequelize')
+const { ENUM, DECIMAL, DATE, NOW } = require('sequelize')
 
 module.exports = db => db.define('order', {
   status: {
-    type: ENUM('processing', 'shipped', 'delivered'),
+    type: ENUM('processing', 'shipped', 'delivered', 'cancelled'),
     defaultValue: 'processing'
+  },
+  subtotal: {
+    type: DECIMAL(10, 2),
+    defaultValue: 0
+  },
+  date: {
+    type: DATE,
+    defaultValue: NOW
   }
 })
 
 module.exports.associations = (Order, { ProductsInOrder }) => {
-  Order.belongsTo(ProductsInOrder)
+  // Order.belongsTo(ProductsInOrder)
 }

@@ -37,7 +37,7 @@ const products = seed(Product, {
     name: 'fire',
     imageUrl: 'https://c1.staticflickr.com/5/4004/5164132293_aa7453ce3a_b.jpg',
     description: 'shoot fire out of palms',
-    price: 12393,
+    price: 1273,
     count: 10,
   },
   ice: {
@@ -103,7 +103,8 @@ const productsInOrder = seed(ProductsInOrder,
       // that we created in the user seed above.
       // The seed function wires the promises so that it'll
       // have been created already.
-      order_id: orders.order1.id // Same thing for things.
+      order_id: orders.order1.id, // Same thing for things.
+      unitPrice: products.fire.price
     }
   })
 )
