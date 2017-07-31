@@ -4,14 +4,12 @@ import { fetchProducts } from "../reducers/product"
 import { connect } from 'react-redux'
 import { NavLink } from "react-router-dom"
 import { withRouter } from 'react-router'
-import Search from "../reducers/search"
 
 export class Main extends Component {
 
     render() {
-        var displayItems = [];
-        this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products;
-        console.log(displayItems);
+        var displayItems = []
+        this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products
 
         return (
             <div>
@@ -37,11 +35,10 @@ export class Main extends Component {
                         })
                     }
                 </div>
-            </div >
+            </div>
         )
     }
 }
-
 
 const mapStateToProps = function (state) {
     return {
