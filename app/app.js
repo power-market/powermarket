@@ -12,6 +12,7 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Main from './components/Main'
 import SingleProduct from './components/SingleProduct'
+import SearchBar from './components/SearchBar'
 import { fetchProducts } from './reducers/product.jsx'
 
 class App extends Component {
@@ -32,8 +33,8 @@ class App extends Component {
               <li className="active"><a href="/">Your Cart</a></li>
               <li className="col-xs-2 col-xs-offset-4">{user ? <WhoAmI /> : <Login />}</li>
             </ul>
-
           </div>
+          <SearchBar />
         </nav>
         <main>
           <Switch>
