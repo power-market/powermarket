@@ -4,8 +4,9 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const ProductsInOrder = props => {
-
   const { order } = props
+  const total = 0
+
   return (
     <div className="order-image">
       <div>
@@ -18,7 +19,7 @@ const ProductsInOrder = props => {
           order ? order.map(product => (
           <div key={product.id} className="">
             { (() => {
-              totalCost += product.order.subtotal
+              total += product.order.subtotal
             })()  }
             <div className="">
               <img className="" src={`${product.imageUrl}`} />
