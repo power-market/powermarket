@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import Review from './Review'
+import { fetchProducts } from '../reducers/product'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import _ from 'lodash'
 
 /* -----------------    COMPONENT     ------------------ */
 
 class SingleProduct extends Component {
   render() {
-    const { products, reviews, paramId } = this.props
-    const filteredProduct = products.filter(product => product.id === paramId)
-    const filteredReviews = reviews.filter(review => review.product_id === filteredProduct.id)
+    const { product, reviews } = this.props
+    const filteredReviews = reviews.filter(review => review.product_id === product.id)
     const stars = () => {
       if (!filteredReviews.length) return 'No Reviews'
       let sum = 0
@@ -19,20 +20,20 @@ class SingleProduct extends Component {
       return 'Rated' + sum / filteredReviews.length + 'out of 5'
     }
     return (
-      <div style={{ marginLeft: 5 + 'em' }}>
+      <div>
         <div>
-          <h1 className="title">{filteredProduct[0] && filteredProduct[0].name}</h1>
-          <h3 className="title">${filteredProduct[0] && filteredProduct[0].price}</h3>
+          <h2 className="title">{product.name}</h2>
+          <h3 className="title">{product.price}</h3>
           <h4>{stars()}</h4>
           <br />
           <div className="photoCard">
-            <img width="200" height="200" src={filteredProduct[0] && filteredProduct[0].imageUrl} />
+            <img width="200" height="200" src={product.imageUrl} />
           </div>
           <br />
           <h4>Description</h4>
           <div className="signin-container">
             <div className="buffer local">
-              <p>{filteredProduct[0] && filteredProduct[0].description}</p>
+              <p>{product.description}</p>
             </div>
           </div>
         </div>
@@ -40,7 +41,7 @@ class SingleProduct extends Component {
         <br />
         <div>
           <div className="bordered">
-            <h3>Reviews</h3>
+            <h3 style={{ marginLeft: 0.5 + 'em' }}>Reviews</h3>
             <br />
             <ul className="media-list" style={{ marginLeft: 1 + 'em' }}>
               {filteredReviews.map(review => <Review review={review} key={review.id} />)}
@@ -48,6 +49,7 @@ class SingleProduct extends Component {
           </div>
           <br />
           <h4>Write a Review</h4>
+          <ReviewForm />
           <br />
         </div>
       </div>
@@ -60,11 +62,12 @@ class SingleProduct extends Component {
 const mapStateToProps = ({ products, reviews }, ownProps) => {
   const paramId = Number(ownProps.match.params.productId)
   return {
-    products,
-    reviews,
-    paramId
+    product: _.find(products, product => product.id === paramId),
+    reviews: reviews
   }
 }
+
+// const mapDispatch = {}
 
 export default withRouter(connect(
   mapStateToProps
