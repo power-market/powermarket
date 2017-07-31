@@ -19,6 +19,7 @@ class AddReviewForm extends React.Component {
         const value = event.target.value;
         this.setState({
             [event.target.name]: value
+        }
         });
     }
 
