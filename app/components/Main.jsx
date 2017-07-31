@@ -80,6 +80,4 @@ export class Main extends Component {
         fetchProducts
     }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

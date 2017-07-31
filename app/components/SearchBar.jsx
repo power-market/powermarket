@@ -27,7 +27,7 @@ handleSubmit(event){
 render(){
     return(
         <div>
-              <form className="form-horizontal" onSubmit = {this.handleSubmit}>
+              <form className="form-horizontal">
              <fieldset>
                 <legend>Search Bar</legend>
                 <label > Search: </label>
