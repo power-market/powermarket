@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom"
 
 export class Main extends Component {
-    componentWillMount() {
-        this.props.fetchProducts()
-    }
+
     render() {
 
         return (
@@ -54,10 +52,4 @@ const mapStateToProps = function (state) {
     }
 }
 
-const mapDispatchToProps = {
-    fetchProducts
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(mapStateToProps)(Main)

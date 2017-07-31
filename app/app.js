@@ -15,8 +15,7 @@ import SingleProduct from './components/SingleProduct'
 import { fetchProducts } from './reducers/product.jsx'
 
 class App extends Component {
-  componentDidMount() {
-    console.log(this.props.fetchInitialData)
+  componentWillMount() {
     this.props.fetchInitialData()
   }
 
@@ -48,7 +47,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({ user: auth })
+const mapStateToProps = ({ auth, products }) => ({ user: auth, products })
 
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
@@ -57,12 +56,3 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatch)(App)
-
-// render(
-//   <Provider store={store}>
-//     <Router>
-//       <App />
-//     </Router>
-//   </Provider>,
-//   document.getElementById('main')
-// )
