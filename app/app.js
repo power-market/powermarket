@@ -11,14 +11,17 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Main from './components/Main'
+import User from './components/User'
 import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
 import { fetchProducts } from './reducers/product.jsx'
+import { fetchOrders } from './reducers/order.jsx'
 import SideBar from "./components/SideBar"
 
 class App extends Component {
   componentWillReceiveProps() {
     this.props.fetchInitialData()
+    this.props.fetchOrderData()
   }
 
   render() {
@@ -29,7 +32,7 @@ class App extends Component {
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="/" style={{ color: "orange" }} >Power Market</a>
+              <a className="navbar-brand" href="/" style={{ color: 'orange' }} >Power Market</a>
             </div>
             <ul className="nav navbar-nav">
               <li className="active"><a href="/">Your Cart</a></li>
@@ -41,6 +44,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route path='/products/:productId' component={SingleProduct} />
+            <Route path='/users/:usersId' component={User} />
             <Route exact path="/" component={Main} />
             <Route component={NotFound} />
           </Switch>
@@ -55,6 +59,9 @@ const mapStateToProps = ({ auth, products }) => ({ user: auth, products })
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
     dispatch(fetchProducts())
+  },
+  fetchOrderData: () => {
+    dispatch(fetchOrders())
   }
 })
 
