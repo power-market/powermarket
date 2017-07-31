@@ -19,7 +19,7 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <div style={{ marginLeft: 60 + 'em' }}>
+      <div style={{ marginLeft: 50 + 'em' }}>
         <form className="form-horizontal" onSubmit={this.onSignupSubmit}>
           <input name="username" />
           <input name="password" type="password" />
@@ -31,6 +31,3 @@ export class Login extends React.Component {
 }
 
 export default connect(state => ({}), { login })(Login)
-
-
-
