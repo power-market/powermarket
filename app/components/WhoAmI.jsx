@@ -1,12 +1,13 @@
 import React from 'react'
-
+import { NavLink } from 'react-router-dom'
 export const WhoAmI = ({ user, logout }) => (
   <div className="whoami" style={{ marginLeft: 67 + 'em' }}>
-    <span className="whoami-user-name" style={{ color: 'orange' }}>Welcome {user && user.name}</span>
+    <NavLink className="whoami-user-name" style={{ color: 'orange' }} to={`/users/${user.id}`}>
+      Welcome {user && user.name}
+    </NavLink>
     <button className="logout" onClick={logout}>Logout</button>
   </div>
 )
-
 import { logout } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
 

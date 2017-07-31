@@ -1,36 +1,37 @@
-import React from 'react';
-import axios from 'axios';
+import React from 'react'
+import axios from 'axios'
+import connect from 'react-redux'
 import { createNewReview } from '../reducers/review'
 
 const reviewForm = {
-    title: '',
-    text: '',
-    stars: 3,
-    date: new Date()
+  title: '',
+  text: '',
+  stars: 3,
+  date: new Date()
 }
 class AddReviewForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+  constructor(props) {
+      super(props)
+      this.handleChange = this.handleChange.bind(this)
+      this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleChange(event) {
-        const value = event.target.value;
-        this.setState({
-            [event.target.name]: value
-        });
+  handleChange(event) {
+      const value = event.target.value
+      this.setState({
+          [event.target.name]: value
+        })
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.createNewReview(this.state)
-        this.props.history.push('/')
-        this.setState(blankFormState);
+  handleSubmit(event) {
+      event.preventDefault()
+      this.props.createNewReview(this.state)
+      this.props.history.push('/')
+      this.setState(blankFormState)
     }
 
-    render() {
-        return (
+  render() {
+      return (
             <div>
                 <div className="col-sm-2"></div>
                 <div className="col-sm-8">
@@ -75,14 +76,14 @@ class AddReviewForm extends React.Component {
                     </form>
                 </div>
             </div>
-        );
+        )
     }
 }
 // const mapState = {
 // }
 
-const mapDispatch = {
-    createNewReview
+const mapDispatchToProps = {
+  createNewReview
 }
 
-export default connect(null, mapDispatch)(ReviewForm)
+export default connect(null, mapDispatchToProps)(AddReviewForm)
