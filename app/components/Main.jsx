@@ -28,7 +28,7 @@ export class Main extends Component {
            var displayItems = [];
            this.props.search.length > 0  ?  displayItems = this.props.search : displayItems = this.props.products;
            console.log(displayItems);
-      
+
         return(     
             <div>
 
@@ -41,7 +41,9 @@ export class Main extends Component {
                     </div>
                 </div>
 
+
                 <div className="row">
+
            {
             displayItems.map(eachProduct => {
             return (
@@ -56,6 +58,7 @@ export class Main extends Component {
                 </Link>
             </div>)
            })
+
                     }
 
                 </div>
@@ -72,4 +75,10 @@ export class Main extends Component {
         }
     }
 
-export default connect(mapStateToProps)(Main)
+const mapDispatchToProps = {
+    fetchProducts
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
