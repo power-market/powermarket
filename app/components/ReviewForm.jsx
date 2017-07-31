@@ -21,6 +21,7 @@ class AddReviewForm extends React.Component {
       this.setState({
           [event.target.name]: value
         })
+
     }
 
   handleSubmit(event) {

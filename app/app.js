@@ -16,9 +16,10 @@ import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
 import { fetchProducts } from './reducers/product.jsx'
 import { fetchOrders } from './reducers/order.jsx'
+import SideBar from "./components/SideBar"
 
 class App extends Component {
-  componentWillMount() {
+  componentWillReceiveProps() {
     this.props.fetchInitialData()
     this.props.fetchOrderData()
   }
@@ -27,6 +28,7 @@ class App extends Component {
     const { user, children } = this.props
     return (
       <div>
+       <SideBar />
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
