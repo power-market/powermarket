@@ -16,6 +16,9 @@ module.exports = db => db.define('product', {
       isUrl: true
     }
   },
+  category: {
+    type: STRING
+  },
   description: {
     type: TEXT
   },
