@@ -36,24 +36,75 @@ const products = seed(Product, {
   fire: {
     name: 'fire',
     imageUrl: 'https://c1.staticflickr.com/5/4004/5164132293_aa7453ce3a_b.jpg',
+    category: 'elemental',
     description: 'shoot fire out of palms',
-    price: 12393,
+    price: 100000,
     count: 10,
   },
   ice: {
     name: 'ice',
     imageUrl: 'https://i.ytimg.com/vi/BwZlVwfz4UY/maxresdefault.jpg',
+    category: 'elemental',
     description: 'shoot ice out of palms',
-    price: 162,
-    count: 10101,
+    price: 1000000,
+    count: 10,
   },
   wind: {
     name: 'wind',
-    imageUrl: "http://static.tvtropes.org/pmwiki/pub/images/Funnel_5498.jpg",
+    imageUrl: 'http://static.tvtropes.org/pmwiki/pub/images/Funnel_5498.jpg',
+    category: 'elemental',
     description: 'shoot wind out of palms',
-    price: 101,
+    price: 9999999,
     count: 1,
   },
+  invisibility: {
+    name: 'invisibility',
+    imageUrl: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/160719123051-02-invisibility-pop-culture-super-169.jpg',
+    category: 'adaptation',
+    description: 'The user can become invisible when in/on/touching air.',
+    price: 23423,
+    count: 12,
+  },
+  'Stench Generation': {
+    name: 'Stench Generation',
+    imageUrl: 'https://vignette3.wikia.nocookie.net/powerlisting/images/6/6e/Spongebob_Suds_Breath.png/revision/latest?cb=20140428063132',
+    category: 'adaptation',
+    description: 'Power to instantly evacuate a room.',
+    price: 23423,
+    count: 12,
+  },
+  flight: {
+    name: 'flight',
+    imageUrl: 'http://cdn.smosh.com/sites/default/files/ftpuploads/bloguploads/flight-better-dude.jpg',
+    category: 'adaptation',
+    descripton: 'Power to fly.',
+    price: 13400,
+    count: 12
+  },
+  telekinesis: {
+    name: 'telekinesis',
+    imageUrl: 'http://d.ibtimes.co.uk/en/full/1511845/telekinesis-mind-control.jpg',
+    category: 'mental',
+    descripton: 'Power to levitate objects up to size of a car.',
+    price: 1340000,
+    count: 2
+  },
+  teleportation: {
+    name: 'teleportation',
+    imageUrl: 'https://i1.wp.com/chrisg.org/wp-content/uploads/2010/10/why-teleportation-evil.png?resize=350%2C200',
+    category: 'mental',
+    descripton: 'Power to teleport to a spot within your vision',
+    price: 13400,
+    count: 1
+  },
+  precognition: {
+    name: 'precognition',
+    imageUrl: 'http://psychicbloggers.com/wp-content/uploads/2012/04/19815801.jpg',
+    category: 'mental',
+    descripton: 'Power to perceive future events.',
+    price: 13400,
+    count: 12
+  }
 })
 
 const reviews = seed(Review,
