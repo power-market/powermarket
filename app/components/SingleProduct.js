@@ -22,6 +22,16 @@ class SingleProduct extends Component {
       <div style={{ marginLeft: 5 + 'em' }}>
         <div>
           <h1 className="title">{filteredProduct[0] && filteredProduct[0].name}</h1>
+          
+
+          <form className="form-inline">
+          <fieldset>
+            <label ><h3 style={{ color: 'orange' }}> Quantity:</h3> </label>
+            <input className="form-control" type="text"/>
+            <button type = "submit" className = "btn btn-success">Add to Cart</button>
+          </fieldset>
+          </form>
+
           <h3 className="title">${filteredProduct[0] && filteredProduct[0].price}</h3>
           <h4>{stars()}</h4>
           <br />
