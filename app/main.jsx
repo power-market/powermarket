@@ -19,6 +19,7 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Main from "./components/Main"
 import SearchBar from "./components/SearchBar"
+import SideBar from "./components/SideBar"
 
 
 const ExampleApp = connect(
@@ -26,6 +27,7 @@ const ExampleApp = connect(
 )(
   ({ user, children }) =>
     <div>
+        <SideBar />
          <nav className="navbar navbar-inverse">
           <div className="container-fluid">
               <div className="navbar-header">
