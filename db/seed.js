@@ -1,22 +1,17 @@
 'use strict'
-
 const db = require('APP/db')
   , { User, Product, Review, Order, ProductsInOrder, Promise } = db
   , { mapValues } = require('lodash')
-
 function seedEverything() {
   const seeded = {
     users: users(),
     products: products()
   }
-
   seeded.orders = orders(seeded)
   seeded.productsInOrder = productsInOrder(seeded)
   seeded.reviews = reviews(seeded)
-
   return Promise.props(seeded)
 }
-
 const users = seed(User, {
   brian: {
     email: 'brian@brian.com',
@@ -31,7 +26,6 @@ const users = seed(User, {
     password: 'hello'
   },
 })
-
 const products = seed(Product, {
   fire: {
     name: 'fire',
@@ -77,7 +71,7 @@ const products = seed(Product, {
     name: 'flight',
     imageUrl: 'http://cdn.smosh.com/sites/default/files/ftpuploads/bloguploads/flight-better-dude.jpg',
     category: 'adaptation',
-    descripton: 'Power to fly.',
+    description: 'Power to fly.',
     price: 13400,
     count: 12
   },
@@ -85,7 +79,7 @@ const products = seed(Product, {
     name: 'telekinesis',
     imageUrl: 'http://d.ibtimes.co.uk/en/full/1511845/telekinesis-mind-control.jpg',
     category: 'mental',
-    descripton: 'Power to levitate objects up to size of a car.',
+    description: 'Power to levitate objects up to size of a car.',
     price: 1340000,
     count: 2
   },
@@ -93,7 +87,7 @@ const products = seed(Product, {
     name: 'teleportation',
     imageUrl: 'https://i1.wp.com/chrisg.org/wp-content/uploads/2010/10/why-teleportation-evil.png?resize=350%2C200',
     category: 'mental',
-    descripton: 'Power to teleport to a spot within your vision',
+    description: 'Power to teleport to a spot within your vision',
     price: 13400,
     count: 1
   },
@@ -101,12 +95,11 @@ const products = seed(Product, {
     name: 'precognition',
     imageUrl: 'http://psychicbloggers.com/wp-content/uploads/2012/04/19815801.jpg',
     category: 'mental',
-    descripton: 'Power to perceive future events.',
+    description: 'Power to perceive future events.',
     price: 13400,
     count: 12
   }
 })
-
 const reviews = seed(Review,
   ({ users, products }) => ({
     'one': {
@@ -125,7 +118,6 @@ const reviews = seed(Review,
     }
   })
 )
-
 const orders = seed(Order,
   ({ users }) => ({
     'order1': {
@@ -137,7 +129,6 @@ const orders = seed(Order,
     }
   })
 )
-
 const productsInOrder = seed(ProductsInOrder,
   // We're specifying a function here, rather than just a rows object.
   // Using a function lets us receive the previously-seeded rows (the seed
@@ -158,14 +149,12 @@ const productsInOrder = seed(ProductsInOrder,
     }
   })
 )
-
 if (module === require.main) {
   db.didSync
     .then(() => db.sync({ force: true }))
     .then(seedEverything)
     .finally(() => process.exit(0))
 }
-
 class BadRow extends Error {
   constructor(key, row, error) {
     super(error)
@@ -173,12 +162,10 @@ class BadRow extends Error {
     this.row = row
     this.key = key
   }
-
   toString() {
     return `[${this.key}] ${this.cause} while creating ${JSON.stringify(this.row, 0, 2)}`
   }
 }
-
 // seed(Model: Sequelize.Model, rows: Function|Object) ->
 //   (others?: {...Function|Object}) -> Promise<Seeded>
 //
@@ -199,7 +186,6 @@ function seed(Model, rows) {
             typeof other === 'function' ? other() : other)
       ).then(rows)
     }
-
     return Promise.resolve(rows)
       .then(rows => Promise.props(
         Object.keys(rows)
@@ -226,5 +212,4 @@ function seed(Model, rows) {
       })
   }
 }
-
 module.exports = Object.assign(seed, { users, orders, reviews, products })
