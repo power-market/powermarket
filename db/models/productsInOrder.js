@@ -17,4 +17,5 @@ module.exports = db => db.define('productsInOrder', {
 
 module.exports.associations = (ProductsInOrder, { Product, Order }) => {
   ProductsInOrder.belongsTo(Order)
+  ProductsInOrder.belongsTo(Product)
 }

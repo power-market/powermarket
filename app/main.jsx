@@ -19,6 +19,7 @@ import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Main from './components/Main'
 import SingleProduct from './components/SingleProduct'
+import Orders from './components/Orders'
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -41,6 +42,7 @@ const ExampleApp = connect(
         <Switch>
           {/* <Route path="/jokes" component={Jokes} /> */}
           <Route exact path="/" component={Main} />
+          <Route path='/orders/:orderId' component={Orders} />
           <Route path='/products/:productId' component={SingleProduct} />
           <Route component={NotFound} />
         </Switch>
