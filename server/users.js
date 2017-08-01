@@ -40,7 +40,7 @@ module.exports = require('express').Router()
   //   Reviews.findAll({ where: { user_id: req.params.id } })
   //     .then(reviews => res.json(reviews)
   //       .catch(next)))
-  .post('/', assertAdmin,
+  .post('/',
   (req, res, next) =>
     User.create(req.body)
       .then(user => res.status(201).json(user))

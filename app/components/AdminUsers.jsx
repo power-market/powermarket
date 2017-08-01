@@ -22,7 +22,6 @@ class UserList extends Component {
   }
 
   render() {
-    console.log(this.props.users)
     return (
       <div className="container">
         <div className="user-query">
@@ -121,7 +120,6 @@ class UserList extends Component {
       email: event.target.email.value,
     }
     this.props.addUser(user)
-    // clear the inputs
     event.target.name.value = ''
     event.target.email.value = ''
   }

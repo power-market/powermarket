@@ -7,7 +7,6 @@ const CREATE = 'CREATE_USER'
 export const REMOVE = 'REMOVE_USER'
 const UPDATE = 'UPDATE_USER'
 
-
 /* ------------   ACTION CREATORS     ------------------ */
 
 const init = users => ({ type: INITIALIZE, users })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { login } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 export class Login extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export class Login extends React.Component {
     }
     this.onSignupSubmit = this.onSignupSubmit.bind(this)
   }
+
   onSignupSubmit = evt => {
     evt.preventDefault()
     this.props.login(evt.target.username.value, evt.target.password.value)
