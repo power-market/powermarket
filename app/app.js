@@ -30,14 +30,18 @@ class App extends Component {
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="/" style={{ color: 'orange' }} >Power Market</a>
+              <h1 className="navbar-brand" href="/" style={{ color: 'orange' }} >Power Market</h1>
             </div>
-            <ul className="nav navbar-nav">
-              <li className="active"><a href="/">Your Cart</a></li>
-              <li className="col-xs-2 col-xs-offset-4">{user ? <WhoAmI /> : <Login />}</li>
+            <ul className="nav col-xs-2 navbar-nav pull-right">
+              <li className="col-xs-2 col-xs-offset-4 pull-right">{user ? <WhoAmI /> : <Login />}</li>
             </ul>
           </div>
-          <SearchBar />
+          <div className="container-fluid">
+            <SearchBar />
+            <a href="/" className="btn btn-info btn-sm col-xs-1">
+              <span className="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+            </a>
+          </div>
         </nav>
         <main>
           <Switch>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Review from './Review'
 import { connect } from 'react-redux'
-// import { ReviewForm } from './ReviewForm'
+import { ReviewForm } from './ReviewForm'
 
 class User extends Component {
     /*
@@ -15,11 +15,10 @@ class User extends Component {
     Product reviews
     Leave a review (with text and a 5-star rating) for a product
     */
-    render() {
-        return (
+  render() {
+      return (
             <div>
                 <h1>Account Management</h1>
-
                 <h2>View Past Order</h2>
                 <h2>Product Reviews</h2>
                 {/* <ReviewForm /> */}
