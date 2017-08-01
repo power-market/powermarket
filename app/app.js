@@ -16,10 +16,10 @@ import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
 import { fetchProducts } from './reducers/product.jsx'
 import { fetchOrders } from './reducers/order.jsx'
-import SideBar from "./components/SideBar"
+import SideBar from './components/SideBar'
 
 class App extends Component {
-  componentWillReceiveProps() {
+  componentWillMount() {
     this.props.fetchInitialData()
     this.props.fetchOrderData()
   }
@@ -28,11 +28,11 @@ class App extends Component {
     const { user, children } = this.props
     return (
       <div>
-       <SideBar />
+        <SideBar />
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
-              <h1 className="navbar-brand" href="/" style={{ color: 'orange' }} >Power Market</h1>
+              <h1><a href="/" className="text-left" style={{ color: 'orange' }} >Power Market</a></h1>
             </div>
             <ul className="nav col-xs-2 navbar-nav pull-right">
               <li className="col-xs-2 col-xs-offset-4 pull-right">{user ? <WhoAmI /> : <Login />}</li>

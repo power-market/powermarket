@@ -7,11 +7,10 @@ import { withRouter } from 'react-router'
 import Sidebar from './Sidebar'
 
 export class Main extends Component {
-  render() {
-      var displayItems = []
-      this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products
-
-      return (
+    render() {
+        var displayItems = []
+        this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products
+        return (
             <div>
                 <Sidebar />
                 <div className="col-xs-10">
@@ -36,10 +35,10 @@ export class Main extends Component {
     }
 }
 
-const mapStateToProps = function(state) {
-  return {
-      products: state.products,
-      search: state.search
+const mapStateToProps = function (state) {
+    return {
+        products: state.products,
+        search: state.search
     }
 }
 

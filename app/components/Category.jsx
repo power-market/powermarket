@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import Products, { fetchProducts } from '../reducers/product'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-class Category extends Component {
-  componentDidMount() {
-
-    }
-  render() {
-      return (
+const Category = (props) => {
+    const products = props;
+    render() {
+        return (
             <div>
-                <h2>{this.props.categories.length && this.props.product.filter((selectedCategory) => (selectedCategory === this.props.product.category)).map(eachProduct => (
+                <h2>{products.categories.length && products.map(eachProduct => (
                     <div className="col-xs-4" key={eachProduct.id}>
                         <Link className="thumbnail" to={`/`}>
                             <img src={eachProduct.imageUrl} className="img-thumbnail" style={{ height: '250px', width: '700px' }} />
@@ -20,7 +17,9 @@ class Category extends Component {
                                 </h5>
                             </div>
                         </Link>
-                    </div>))}</h2>
+                    </div>
+                ))}
+                </h2>
             </div>
         )
     }
@@ -28,7 +27,7 @@ class Category extends Component {
 
 const mapStateToProps = (state) => ({ product: state.product })
 const mapDispatchToProps = (dispatch) => {
-  fetchProducts
+    fetchProducts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category)
