@@ -4,7 +4,7 @@ export const WhoAmI = ({ user, logout }) => (
   <div>
     <div className='whoami pull-right'>
       <NavLink className="whoami-user-name" style={{ color: 'orange' }} to={`/users/${user.id}`}>
-        <h4>Welcome {user && user.name}</h4>
+        <h5>Welcome {user && user.name}</h5>
       </NavLink>
     </div>
     <button className="logout pull-right" onClick={logout}>Logout</button>
