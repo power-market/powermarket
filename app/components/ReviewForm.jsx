@@ -7,7 +7,6 @@ const reviewForm = {
   title: '',
   text: '',
   stars: 3,
-  date: new Date()
 }
 class AddReviewForm extends React.Component {
   constructor(props) {
@@ -87,4 +86,4 @@ const mapDispatchToProps = {
   createNewReview
 }
 
-export default connect(null, mapDispatchToProps)(AddReviewForm)
+// export default connect(null, mapDispatchToProps)(AddReviewForm)

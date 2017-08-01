@@ -1,50 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { fetchProducts } from '../reducers/product'
-import Sidebar from 'react-side-bar';
+import Category from './Category'
 
-export class SideBar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            categories: [],
-        }
-        this.sidebarProps = {
-            bar: (<div>Amazing Sidebar</div>),
-            size: 1000,
-        }
-        this.filteredCategories = this.filteredCategories.bind(this)
-    }
-    componentDidMount() {
-        this.props.fetchProducts()
-    }
-
-    filteredCategories() {
-        this.props.products.forEach((eachProduct) => {
-            if (!this.state.categories.includes(eachProduct.category)) {
-                this.state.categories.push(eachProduct.category)
-            }
-        })
-    }
-
+class Sidebar extends React.Component {
     render() {
-        this.filteredCategories()
-        //   console.log("just put shit into store", this.state.categories)
+        const { products } = this.props
+        const elemental = products.filter(product => product.category === 'elemental')
+        const adaptation = products.filter(product => product.category === 'adaptation')
+        const mental = products.filter(product => product.category === 'mental')
         return (
-            <div>Hi!!</div>
-            // <Sidebar {...this.sidebarProps} />
+            <sidebar className='col-xs-2'>
+                <div className="sidebar-header">
+                    <h3 href="/">
+                        <div>Categories</div>
+                    </h3>
+                </div>
+                {/* <Category props={elemental} />
+                <Category props={adaptation} />
+                <Category props={mental} /> */}
+
+            </sidebar>
         )
     }
 }
+const mapStateToProps = ({ products }) => ({ products })
 
-const mapStateToProps = function (state) {
-    return {
-        products: state.products
-    }
-}
-const mapDispatchToProps = {
-
-    fetchProducts
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SideBar)
+export default connect(mapStateToProps)(Sidebar)

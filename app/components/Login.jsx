@@ -3,14 +3,13 @@ import { login } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
 
 export class Login extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     }
-    this.onSignupSubmit = this.onSignupSubmit.bind(this);
+    this.onSignupSubmit = this.onSignupSubmit.bind(this)
   }
   onSignupSubmit = evt => {
     evt.preventDefault()
@@ -19,7 +18,7 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <div style={{ marginLeft: 50 + 'em' }}>
+      <div className='pull-right'>
         <form className="form-horizontal" onSubmit={this.onSignupSubmit}>
           <input name="username" />
           <input name="password" type="password" />

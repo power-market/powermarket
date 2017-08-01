@@ -1,31 +1,30 @@
-import axios from 'axios';
+import axios from 'axios'
 
 // REDUCERS
 
 const reducer = (reviews = [], action) => {
-
   switch (action.type) {
-    case ADD_REVIEW:
-      return [action.review, ...reviews]
-    case GET_REVIEWS:
-      return action.reviews;
+  case ADD_REVIEW:
+    return [action.review, ...reviews]
+  case GET_REVIEWS:
+    return action.reviews
     case DELETE_REVIEW:
-      return reviews.filter(reviews => reviews.id !== action.id)
-    default:
-      return reviews
+    return reviews.filter(reviews => reviews.id !== action.id)
+  default:
+    return reviews
   }
 }
 
 // ACTIONS
-const ADD_REVIEW = 'ADD_REVIEW';
-const DELETE_REVIEW = 'DELETE_REVIEW';
-const GET_REVIEWS = 'GET_REVIEWS';
+const ADD_REVIEW = 'ADD_REVIEW'
+const DELETE_REVIEW = 'DELETE_REVIEW'
+const GET_REVIEWS = 'GET_REVIEWS'
 
 // ACTION-CREATORS
 
-export const addReview = (review) => ({ type: ADD_REVIEW, review });
+export const addReview = (review) => ({ type: ADD_REVIEW, review })
 export const getReviews = (reviews) => ({ type: GET_REVIEWS, reviews })
-export const deleteReview = (review) => ({ type: DELETE_REVIEW, review });
+export const deleteReview = (review) => ({ type: DELETE_REVIEW, review })
 
 // Thunk
 
@@ -40,8 +39,8 @@ export const fetchReviews = (reviews) => {
   }
 }
 export const createNewReview = (review) => {
-  return function (dispatch) {
-    axios.post('api/reviews/', taco)
+  dispatch => {
+    axios.post('api/reviews/')
       .then(res => res.data)
       .then(newReview => {
         dispatch(addReview(newReview))
@@ -49,4 +48,4 @@ export const createNewReview = (review) => {
   }
 }
 
-export default reducer; 
+export default reducer
