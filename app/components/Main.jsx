@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import Products from '../reducers/product'
-import { fetchProducts } from '../reducers/product'
+import Products, { fetchProducts } from '../reducers/product'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import Sidebar from './Sidebar'
 
 export class Main extends Component {
-  render() {
-      var displayItems = []
-      this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products
+    render() {
+        var displayItems = []
+        this.props.search.length > 0 ? displayItems = this.props.search : displayItems = this.props.products
 
-      return (
+        return (
             <div>
                 <Sidebar />
                 <div className="col-xs-10">
@@ -36,10 +35,10 @@ export class Main extends Component {
     }
 }
 
-const mapStateToProps = function(state) {
-  return {
-      products: state.products,
-      search: state.search
+const mapStateToProps = function (state) {
+    return {
+        products: state.products,
+        search: state.search
     }
 }
 

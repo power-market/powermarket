@@ -1,10 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+
 export const WhoAmI = ({ user, logout }) => (
-  <div className="whoami" style={{ marginLeft: 67 + 'em' }}>
-    <NavLink className="whoami-user-name" style={{ color: 'orange' }} to={`/users/${user.id}`}>
-      <a>Welcome {user && user.name}</a>
-    </NavLink>
+  <div className="whoami">
+    <span className="whoami-user-name" style={{ color: 'orange' }}>
+      Welcome {user && user.name}
+    </span>
     <button className="logout" onClick={logout}>Logout</button>
   </div>
 )
