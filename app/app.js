@@ -16,7 +16,7 @@ import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
 import { fetchProducts } from './reducers/product.jsx'
 import { fetchOrders } from './reducers/order.jsx'
-import SideBar from './components/SideBar'
+import SideBar from './components/Sidebar'
 
 class App extends Component {
   componentWillMount() {
