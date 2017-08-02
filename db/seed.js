@@ -80,7 +80,7 @@ const products = seed(Product, {
     imageUrl: 'http://d.ibtimes.co.uk/en/full/1511845/telekinesis-mind-control.jpg',
     category: 'mental',
     description: 'Power to levitate objects up to size of a car.',
-    price: 1340000,
+    price: 1340,
     quantity: 2
   },
   teleportation: {
@@ -126,6 +126,14 @@ const orders = seed(Order,
       // The seed function wires the promises so that it'll
       // have been created already.
       status: 'delivered' // Same thing for things.
+    },
+    'order2': {
+      user_id: users.brian.id,
+      status: 'processing'
+    },
+    'order3': {
+      user_id: users.barack.id,
+      status: 'processing'
     }
   })
 )
@@ -147,6 +155,31 @@ const productsInOrder = seed(ProductsInOrder,
       // have been created already.
       order_id: orders.order1.id, // Same thing for things.
       unitPrice: products.fire.price
+    },
+    'order 2': {
+      product_id: products.ice.id,
+      order_id: orders.order2.id,
+      unitPrice: products.ice.price
+    },
+    'order 3': {
+      product_id: products.ice.id,
+      order_id: orders.order1.id,
+      unitPrice: products.ice.price
+    },
+    'order 4': {
+      product_id: products.flight.id,
+      order_id: orders.order1.id,
+      unitPrice: products.flight.price
+    },
+    'order 5': {
+      product_id: products.ice.id,
+      order_id: orders.order3.id,
+      unitPrice: products.ice.price
+    },
+    'order 6': {
+      product_id: products.flight.id,
+      order_id: orders.order3.id,
+      unitPrice: products.flight.price
     }
   })
 )

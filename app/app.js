@@ -14,8 +14,10 @@ import User from './components/User'
 import AdminUsers from './components/AdminUsers.jsx'
 import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
+import Orders from './components/orders'
+import ProductsInOrder from './components/ProductsInOrder'
 import { fetchProducts } from './reducers/product.jsx'
-import { fetchOrders } from './reducers/order.jsx'
+import { fetchOrders, fetchOrder } from './reducers/order'
 
 class App extends Component {
   componentWillMount() {
@@ -52,6 +54,8 @@ class App extends Component {
           <Router history={history}>
             <Switch>
               <Route path='/products/:productId' component={SingleProduct} />
+              <Route path='/orders/:orderId' component={ProductsInOrder} />
+              <Route path='/orders' component={Orders} />
               <Route path='/users/:usersId' component={User} />
               <Route path='/users' component={AdminUsers} />
               <Route path="/signup" component={Signup} />
