@@ -13,7 +13,7 @@ export class SideBar extends Component{
     }
     this.sidebarProps = {
         bar: (<div>Amazing Sidebar</div>),
-        size: 1000,
+        size: 1000
     };
     this.filteredCategories = this.filteredCategories.bind(this);
   }
@@ -51,7 +51,6 @@ const mapStateToProps = function(state){
   }
 }
 const mapDispatchToProps = {
-
   fetchProducts
 }
 

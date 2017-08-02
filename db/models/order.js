@@ -4,8 +4,8 @@ const { ENUM, DECIMAL, DATE, NOW } = require('sequelize')
 
 module.exports = db => db.define('order', {
   status: {
-    type: ENUM('processing', 'shipped', 'delivered', 'cancelled'),
-    defaultValue: 'processing'
+    type: ENUM('processing', 'shipped', 'delivered', 'cancelled', 'cart'),
+    defaultValue: 'cart'
   },
   subtotal: {
     type: DECIMAL(10, 2),

@@ -18,10 +18,11 @@ module.exports = require('express').Router()
       .catch(next)
   })
   .get('/',
-  (req, res, next) =>
+  (req, res, next) =>{
+  console.log("THIS IS MY FUCKING SESSION ====>", req.session.passport.user)
     Product.findAll()
       .then(product => res.json(product))
-      .catch(next))
+      .catch(next)})
   .post('/', assertAdmin,
   (req, res, next) =>
     Product.create(req.body)
@@ -45,3 +46,6 @@ module.exports = require('express').Router()
       .then(() => res.sendStatus(204))
       .catch(next)
   })
+
+
+  //ADD CART ROUTES

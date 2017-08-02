@@ -4,6 +4,7 @@ const db = require('APP/db')
 const User = db.model('users')
 const Orders = db.model('order')
 const Reviews = db.model('review')
+const CartItem = db.model("cartItem")
 
 const { mustBeLoggedIn, selfOnly, assertAdmin, selfOrAdmin } = require('./auth.filters')
 
@@ -21,7 +22,7 @@ module.exports = require('express').Router()
   })
   .get('/', assertAdmin,
   (req, res, next) => {
-    User.findAll()
+    User.findAll({include: [{model: CartItem, as: "user" }] }) //check with someone if this is right
       .then(users => res.json(users))
       .catch(next)
   })

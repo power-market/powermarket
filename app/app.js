@@ -4,23 +4,25 @@ import 'babel-polyfill'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Provider, connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import store from './store'
-import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 import Main from './components/Main'
 import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
+import Cart from "./components/Cart"
+
 import { fetchProducts } from './reducers/product.jsx'
 import SideBar from "./components/SideBar"
+import {allProductsInCart} from './reducers/cart.jsx'
 
 class App extends Component {
-  componentWillReceiveProps() {
+
+  componentDidMount() {
     this.props.fetchInitialData()
   }
-
   render() {
     const { user, children } = this.props
     return (
@@ -32,7 +34,7 @@ class App extends Component {
               <a className="navbar-brand" href="/" style={{ color: "orange" }} >Power Market</a>
             </div>
             <ul className="nav navbar-nav">
-              <li className="active"><a href="/">Your Cart</a></li>
+              <li className="active"><a href="/cart">Your Cart</a></li>
               <li className="col-xs-2 col-xs-offset-4">{user ? <WhoAmI /> : <Login />}</li>
             </ul>
           </div>
@@ -41,6 +43,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route path='/products/:productId' component={SingleProduct} />
+            <Route exact path = '/cart' component = {Cart} />
             <Route exact path="/" component={Main} />
             <Route component={NotFound} />
           </Switch>
@@ -55,7 +58,7 @@ const mapStateToProps = ({ auth, products }) => ({ user: auth, products })
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
     dispatch(fetchProducts())
-  }
+  },
 })
 
-export default connect(mapStateToProps, mapDispatch)(App)
+export default withRouter(connect(mapStateToProps, mapDispatch)(App))

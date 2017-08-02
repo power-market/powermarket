@@ -18,6 +18,7 @@ const app = require('APP')
     Product: require('./product'),
     Order: require('./order'),
     Review: require('./review'),
+    CartItem: require('./cartItem'),
     ProductsInOrder: require('./productsInOrder')
     // ---------- Add new models here ----------
   }

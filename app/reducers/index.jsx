@@ -5,7 +5,8 @@ const rootReducer = combineReducers({
   products: require('./product').default,
   order: require('./order').default,
   search: require('./search').default,
-  reviews: require('./review').default
+  reviews: require('./review').default,
+  cart: require('./cart').default
 })
 
 export default rootReducer
