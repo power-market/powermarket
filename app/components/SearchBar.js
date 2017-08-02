@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
   allProducts: state.allSearched
 })
 const mapDispatchToProps = (dispatch) => ({
-  filterProducts: function(whatUserTyped) {
+  filterProducts: function (whatUserTyped) {
     var filteredThings = filterProducts(whatUserTyped)
     dispatch(filteredThings)
   }
