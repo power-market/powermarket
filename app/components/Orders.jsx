@@ -11,18 +11,19 @@ export class Orders extends Component {
   // }
 
   render() {
+    const allOrders = this.props.allOrders.filter(order => this.props.auth.id === order.user_id)
     return (
       <div>
         <h2>My Orders</h2>
         <div>
           {
-            this.props.allOrders.length && this.props.allOrders.map(order =>
+            allOrders.length && allOrders.map(order =>
             <div key={order.id}>
               <h3>Order #:
                 <Link to={`/orders/${order.id}`}>
                   {order.id}
                 </Link>
-
+                <div>{console.log('THIS.PROPS', this.props)}</div>
               </h3>
               <h5>Date: {order.date}</h5>
               <h4>
@@ -40,6 +41,7 @@ export class Orders extends Component {
 
 const mapStateToProps = (state) => ({
   allOrders: state.order.allOrders,
+  auth: state.auth
 })
 // const mapDispatchToProps = (dispatch, ownProps) => ({
 //   getAllOrders: () => {
