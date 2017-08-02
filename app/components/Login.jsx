@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { login } from 'APP/app/reducers/auth'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 export class Login extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     }
-    this.onSignupSubmit = this.onSignupSubmit.bind(this);
+    this.onSignupSubmit = this.onSignupSubmit.bind(this)
   }
+
   onSignupSubmit = evt => {
     evt.preventDefault()
     this.props.login(evt.target.username.value, evt.target.password.value)
@@ -19,7 +20,7 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <div style={{ marginLeft: 60 + 'em' }}>
+      <div className='pull-right'>
         <form className="form-horizontal" onSubmit={this.onSignupSubmit}>
           <input name="username" />
           <input name="password" type="password" />
@@ -31,6 +32,3 @@ export class Login extends React.Component {
 }
 
 export default connect(state => ({}), { login })(Login)
-
-
-

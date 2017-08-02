@@ -20,10 +20,10 @@ export class SearchBar extends Component {
   render() {
     return (
       <div>
-        <form className="form-horizontal" onSubmit={this.handleSubmit}>
+        <form className="form-horizontal col-xs-11">
           <fieldset>
-            <label ><h3 style={{ color: 'orange' }}> Search:</h3> </label>
-            <input className="form-control" value={this.state.search} type="text" onChange={this.searchHandleChange} />
+            {/* <label ><h4 style={{ color: 'orange' }}> Search:</h4> </label> */}
+            <input className="form-control" value={this.state.search} type="text" onChange={this.searchHandleChange} placeholder='Enter Search' />
           </fieldset>
         </form>
       </div>
@@ -31,18 +31,14 @@ export class SearchBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    allProducts: state.allSearched
+const mapStateToProps = (state) => ({
+  allProducts: state.allSearched
+})
+const mapDispatchToProps = (dispatch) => ({
+  filterProducts: function (whatUserTyped) {
+    var filteredThings = filterProducts(whatUserTyped)
+    dispatch(filteredThings)
   }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    filterProducts: function (whatUserTyped) {
-      var filteredThings = filterProducts(whatUserTyped)
-      dispatch(filteredThings)
-    }
-  }
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)

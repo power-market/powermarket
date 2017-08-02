@@ -1,22 +1,20 @@
 import axios from 'axios'
 
-export const GET_SEARCHED_PRODUCTS = "GET_SEARCHED_PRODUCTS"
+export const GET_SEARCHED_PRODUCTS = 'GET_SEARCHED_PRODUCTS'
 
-export const getSearchedProducts = (searchedProducts) => {
-  return {
-    type: GET_SEARCHED_PRODUCTS,
-    searchedProducts
-  }
-}
+export const getSearchedProducts = (searchedProducts) => ({
+  type: GET_SEARCHED_PRODUCTS,
+  searchedProducts
+})
 export default function reducer(allSearched = [], action) {
   switch (action.type) {
-    case GET_SEARCHED_PRODUCTS:
-      return action.searchedProducts
-    default:
-      return allSearched
+  case GET_SEARCHED_PRODUCTS:
+    return action.searchedProducts
+  default:
+    return allSearched
   }
 }
-//get all Products - Unfilitered
+// get all Products - Unfilitered
 export const unfilteredProducts = () => dispatch => {
   axios.get('/api/products')
     .then(res => res.data)
@@ -25,16 +23,15 @@ export const unfilteredProducts = () => dispatch => {
       dispatch(action)
     })
 }
-//change Products
+// change Products
 export const filterProducts = (searchedItem) => dispatch => {
-  axios.get("/api/products")
+  axios.get('/api/products')
     .then(res => res.data)
     .then(products => {
       var filteredProducts = []
       products.forEach(eachProduct => {
         console.log(eachProduct)
-        if (eachProduct.name.includes(searchedItem) && searchedItem.length > 1)
-          filteredProducts.push(eachProduct)
+        if (eachProduct.name.toLowerCase().includes((searchedItem.toLowerCase())) && searchedItem.length > 1) { filteredProducts.push(eachProduct) }
       })
       const action = getSearchedProducts(filteredProducts)
       dispatch(action)
