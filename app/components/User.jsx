@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Review from './Review'
 import { connect } from 'react-redux'
 import { ReviewForm } from './ReviewForm'
+import { Link } from 'react-router-dom'
 
 class User extends Component {
     /*
@@ -19,7 +20,7 @@ class User extends Component {
       return (
             <div>
                 <h1>Account Management</h1>
-                <h2>View Past Order</h2>
+                <h2><Link to={`/orders`}>View Past Order</Link></h2>
                 <h2>Product Reviews</h2>
                 {/* <ReviewForm /> */}
             </div>

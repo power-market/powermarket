@@ -11,7 +11,6 @@ export class Orders extends Component {
   // }
 
   render() {
-
     return (
       <div>
         <h2>My Orders</h2>
