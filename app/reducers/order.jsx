@@ -26,32 +26,67 @@ export const fetchOrders = () => dispatch => {
     .catch(err => console.error('Fetching orders unsuccessful', err))
 }
 export const fetchOrder = (id) => dispatch => {
-  axios.get(`/api/orders/${id}`)
-     .then(res => dispatch(update(res.data)))
+  axios.get(`/api/orders/${id}/products`)
+     .then(res => {
+       dispatch(getOrder(res.data))
+     })
+     .catch(err => console.error('Fetching order products unsuccessful', err));
+};
+export const removeOrder = (id) => dispatch => {
+  axios.put(`/api/orders/${id}`, {status: 'cancelled'})
+     .then(res => {
+       return axios.get(`/api/orders/${id}`)
+     })
+     .then(() => dispatch(getOrder(id)))
+     .catch(err => console.error('Fetching order products unsuccessful', err));
+};
+export const fetchOrderPoducts = (id) => dispatch => {
+  axios.get(`/api/orders/${id}/products`)
+     .then(res => {
+       dispatch(getOrder(res.data))
+     })
      .catch(err => console.error('Fetching order products unsuccessful', err));
 };
 
+// INITIAL STATE
+
+const initialState = {
+  allOrders: [],
+  selectedOrder: {
+    id: null
+  }
+}
 // REDUCERS
 
-const reducer = (orders = [], action) => {
+//initial state that is an object that has allOrders and selectedOrder on it
+// returning an object always (remember object.assign)
+// state.orders.allOrders
+const reducer = (state = initialState, action) => { // rename orders param to 'state' and initialize it with an initialState variable
+  const newState = Object.assign({}, state)
+
   switch (action.type) {
 
     case GET_ORDERS:
-      return action.orders
+      newState.allOrders = action.orders
+      break;
     case GET_ORDER:
-      return action.order
+      newState.selectedOrder = action.order
+      break;
     case CREATE_ORDER:
-      return [action.order, ...orders]
+      newState.allOrders = [action.order, ...state.allOrders]
+      break;
     case CANCEL_ORDER:
-      return orders.filter(order => order.id !== action.id)
+      newState.allOrders.filter(order => state.selectedOrder.id !== action.id)
+      break;
     case UPDATE_ORDER:
-      return orders.map(order => (
+      newState.allOrders.map(order => (
         action.order.id === order.id ? action.order : order
       ))
 
     default:
-      return orders
+      return state // new default would be return state
   }
+  return newState
 }
 
 export default reducer

@@ -2,11 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 export const WhoAmI = ({ user, logout }) => (
-  <div className="whoami">
-    <span className="whoami-user-name" style={{ color: 'orange' }}>
-      Welcome {user && user.name}
-    </span>
-    <button className="logout" onClick={logout}>Logout</button>
+  <div>
+    <div className='whoami pull-right'>
+      <NavLink className="whoami-user-name" style={{ color: 'orange' }} to={`/users/${user.id}`}>
+        <h5>Welcome {user && user.name}</h5>
+      </NavLink>
+    </div>
+    <button className="logout pull-right" onClick={logout}>Logout</button>
   </div>
 )
 import { logout } from 'APP/app/reducers/auth'

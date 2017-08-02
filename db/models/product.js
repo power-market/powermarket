@@ -19,6 +19,9 @@ module.exports = db => db.define('product', {
   description: {
     type: TEXT
   },
+  category: {
+    type: STRING,
+  },
   price: {
     type: DECIMAL(10, 2),
     allowNull: false
@@ -35,5 +38,5 @@ module.exports = db => db.define('product', {
 
 module.exports.associations = (Product, { Order, Review, ProductsInOrder }) => {
   Product.hasMany(Review)
-  Product.belongsToMany(Order, {through: ProductsInOrder})
+  Product.belongsToMany(Order, { through: ProductsInOrder })
 }
