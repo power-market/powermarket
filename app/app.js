@@ -4,7 +4,9 @@ import 'babel-polyfill'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Provider, connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { Router } from 'react-router'
+import { BrowserRouter, Switch, Route, Redirect, Link, withRouter } from 'react-router-dom'
+import history from './history'
 import store from './store'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
@@ -14,10 +16,12 @@ import User from './components/User'
 import AdminUsers from './components/AdminUsers.jsx'
 import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
-import Orders from './components/orders'
 import ProductsInOrder from './components/ProductsInOrder'
+import Orders from './components/Orders'
 import { fetchProducts } from './reducers/product.jsx'
-import { fetchOrders, fetchOrder } from './reducers/order'
+import { fetchOrders } from './reducers/order.jsx'
+import { fetchUsers } from './reducers/users.jsx'
+import Signup from './components/Signup.jsx'
 
 class App extends Component {
   componentWillMount() {
@@ -51,7 +55,6 @@ class App extends Component {
           </div>
         </nav>
         <main>
-          <Router history={history}>
             <Switch>
               <Route path='/products/:productId' component={SingleProduct} />
               <Route path='/orders/:orderId' component={ProductsInOrder} />
@@ -62,7 +65,6 @@ class App extends Component {
               <Route exact path="/" component={Main} />
               <Route component={NotFound} />
             </Switch>
-          </Router >
         </main>
       </div>
     )
