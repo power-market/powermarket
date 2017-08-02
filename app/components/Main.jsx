@@ -5,17 +5,34 @@ import { withRouter } from 'react-router'
 // import Sidebar from './Sidebar'
 
 export class Main extends Component {
-  constructor() {
-      super()
-      this.state = {
-          displayItems: [],
-          sortingtype: ''
+    constructor() {
+        super()
+        this.state = {
+            displayItems: [],
+            sortingtype: ''
         }
     }
-  render() {
-      this.state.displayItems.length > 0 ? this.state.displayItems : this.state.displayItems = this.props.products
-      this.props.search.length > 0 ? this.state.displayItems = this.props.search : this.state.displayItems
-      return (
+    render() {
+        this.state.displayItems.length > 0 ? this.state.displayItems : this.state.displayItems = this.props.products
+        this.props.search.length > 0 ? this.state.displayItems = this.props.search : this.state.displayItems
+        if (this.state.sortingtype === 'price-ascending') {
+            this.state.displayItems.sort(function (a, b) {
+                return parseFloat(a.price) - parseFloat(b.price)
+            })
+        } else if (this.state.sortingtype === 'price-descending') {
+            this.state.displayItems.sort(function (a, b) {
+                return parseFloat(b.price) - parseFloat(a.price)
+            })
+        } else if (this.state.sortingtype === 'title-ascending') {
+            this.state.displayItems.sort(function (a, b) {
+                return a.name > b.name
+            })
+        } else if (this.state.sortingtype === 'title-descending') {
+            this.state.displayItems.sort(function (a, b) {
+                return b.name > a.name
+            })
+        }
+        return (
             <div>
                 <sidebar className='col-xs-2 sidebar-nav'>
                     <div className="sidebar-brand">
@@ -34,15 +51,12 @@ export class Main extends Component {
 
                     <div>
                         <label>Sort by</label>
-                        <select style={{ color: '#263238' }}>
-                            <option>Featured</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                            <option>A-Z</option>
-                            <option>Z-A</option>
-                            <option>Oldest to Newest</option>
-                            <option>Newest to Oldest</option>
-                            <option>Best Selling</option>
+                        <select onChange={this.handleSortChange.bind(this)}>
+                            <option value="everything">Featured</option>
+                            <option value="price-ascending">Price: Low to High</option>
+                            <option value="price-descending">Price: High to Low</option>
+                            <option value="title-ascending">A-Z</option>
+                            <option value="title-descending">Z-A</option>
                         </select>
                     </div>
                 </sidebar>
@@ -70,27 +84,32 @@ export class Main extends Component {
         )
     }
 
-  onElementalClick() {
-      this.setState({
-          displayItems: this.props.products.filter(product => product.category === 'elemental')
+    onElementalClick() {
+        this.setState({
+            displayItems: this.props.products.filter(product => product.category === 'elemental')
         })
     }
-  onMentalClick() {
-      this.setState({
-          displayItems: this.props.products.filter(product => product.category === 'mental')
+    onMentalClick() {
+        this.setState({
+            displayItems: this.props.products.filter(product => product.category === 'mental')
         })
     }
-  onAdaptationClick() {
-      this.setState({
-          displayItems: this.props.products.filter(product => product.category === 'adaptation')
+    onAdaptationClick() {
+        this.setState({
+            displayItems: this.props.products.filter(product => product.category === 'adaptation')
+        })
+    }
+    handleSortChange(evt) {
+        this.setState({
+            sortingtype: evt.target.value
         })
     }
 }
 
-const mapStateToProps = function(state) {
-  return {
-      products: state.products,
-      search: state.search
+const mapStateToProps = function (state) {
+    return {
+        products: state.products,
+        search: state.search
     }
 }
 

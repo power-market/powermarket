@@ -33,7 +33,7 @@ const products = seed(Product, {
     category: 'elemental',
     description: 'shoot fire out of palms',
     price: 100000,
-    count: 10,
+    quantity: 10,
   },
   ice: {
     name: 'Ice',
@@ -41,7 +41,7 @@ const products = seed(Product, {
     category: 'elemental',
     description: 'shoot ice out of palms',
     price: 1000000,
-    count: 10,
+    quantity: 10,
   },
   wind: {
     name: 'Wind',
@@ -49,7 +49,7 @@ const products = seed(Product, {
     category: 'elemental',
     description: 'shoot wind out of palms',
     price: 9999999,
-    count: 1,
+    quantity: 1,
   },
   invisibility: {
     name: 'Invisibility',
@@ -57,7 +57,7 @@ const products = seed(Product, {
     category: 'adaptation',
     description: 'The user can become invisible when in/on/touching air.',
     price: 23423,
-    count: 12,
+    quantity: 12,
   },
   'stench generation': {
     name: 'Stench Generation',
@@ -65,7 +65,7 @@ const products = seed(Product, {
     category: 'adaptation',
     description: 'Power to instantly evacuate a room.',
     price: 23423,
-    count: 12,
+    quantity: 12,
   },
   flight: {
     name: 'Flight',
@@ -73,7 +73,7 @@ const products = seed(Product, {
     category: 'adaptation',
     description: 'Power to fly.',
     price: 13400,
-    count: 12
+    quantity: 12
   },
   telekinesis: {
     name: 'Telekinesis',
@@ -81,7 +81,7 @@ const products = seed(Product, {
     category: 'mental',
     description: 'Power to levitate objects up to size of a car.',
     price: 1340000,
-    count: 2
+    quantity: 2
   },
   teleportation: {
     name: 'Teleportation',
@@ -89,7 +89,7 @@ const products = seed(Product, {
     category: 'mental',
     description: 'Power to teleport to a spot within your vision',
     price: 13400,
-    count: 1
+    quantity: 1
   },
   precognition: {
     name: 'Precognition',
@@ -97,7 +97,7 @@ const products = seed(Product, {
     category: 'mental',
     description: 'Power to perceive future events.',
     price: 13400,
-    count: 12
+    quantity: 12
   }
 })
 const reviews = seed(Review,
