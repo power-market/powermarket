@@ -4,7 +4,7 @@ import 'babel-polyfill'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Provider, connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
@@ -16,7 +16,6 @@ import SingleProduct from './components/SingleProduct'
 import SearchBar from './components/SearchBar'
 import { fetchProducts } from './reducers/product.jsx'
 import { fetchOrders } from './reducers/order.jsx'
-import SideBar from './components/Sidebar'
 
 class App extends Component {
   componentWillMount() {
@@ -28,7 +27,6 @@ class App extends Component {
     const { user, children } = this.props
     return (
       <div>
-        <SideBar />
         <nav className="navbar navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -69,4 +67,4 @@ const mapDispatch = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatch)(App)
+export default withRouter(connect(mapStateToProps, mapDispatch)(App))

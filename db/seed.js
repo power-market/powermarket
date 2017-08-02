@@ -28,7 +28,7 @@ const users = seed(User, {
 })
 const products = seed(Product, {
   fire: {
-    name: 'fire',
+    name: 'Fire',
     imageUrl: 'https://c1.staticflickr.com/5/4004/5164132293_aa7453ce3a_b.jpg',
     category: 'elemental',
     description: 'shoot fire out of palms',
@@ -36,7 +36,7 @@ const products = seed(Product, {
     count: 10,
   },
   ice: {
-    name: 'ice',
+    name: 'Ice',
     imageUrl: 'https://i.ytimg.com/vi/BwZlVwfz4UY/maxresdefault.jpg',
     category: 'elemental',
     description: 'shoot ice out of palms',
@@ -44,7 +44,7 @@ const products = seed(Product, {
     count: 10,
   },
   wind: {
-    name: 'wind',
+    name: 'Wind',
     imageUrl: 'http://static.tvtropes.org/pmwiki/pub/images/Funnel_5498.jpg',
     category: 'elemental',
     description: 'shoot wind out of palms',
@@ -52,14 +52,14 @@ const products = seed(Product, {
     count: 1,
   },
   invisibility: {
-    name: 'invisibility',
-    imageUrl: 'http://i2.cdn.cnn.com/cnnnext/dam/assets/160719123051-02-invisibility-pop-culture-super-169.jpg',
+    name: 'Invisibility',
+    imageUrl: 'http://i.dailymail.co.uk/i/pix/2015/01/26/2519277000000578-2927503-image-a-13_1422313512226.jpg',
     category: 'adaptation',
     description: 'The user can become invisible when in/on/touching air.',
     price: 23423,
     count: 12,
   },
-  'Stench Generation': {
+  'stench generation': {
     name: 'Stench Generation',
     imageUrl: 'https://vignette3.wikia.nocookie.net/powerlisting/images/6/6e/Spongebob_Suds_Breath.png/revision/latest?cb=20140428063132',
     category: 'adaptation',
@@ -68,7 +68,7 @@ const products = seed(Product, {
     count: 12,
   },
   flight: {
-    name: 'flight',
+    name: 'Flight',
     imageUrl: 'http://cdn.smosh.com/sites/default/files/ftpuploads/bloguploads/flight-better-dude.jpg',
     category: 'adaptation',
     description: 'Power to fly.',
@@ -76,7 +76,7 @@ const products = seed(Product, {
     count: 12
   },
   telekinesis: {
-    name: 'telekinesis',
+    name: 'Telekinesis',
     imageUrl: 'http://d.ibtimes.co.uk/en/full/1511845/telekinesis-mind-control.jpg',
     category: 'mental',
     description: 'Power to levitate objects up to size of a car.',
@@ -84,15 +84,15 @@ const products = seed(Product, {
     count: 2
   },
   teleportation: {
-    name: 'teleportation',
-    imageUrl: 'https://i1.wp.com/chrisg.org/wp-content/uploads/2010/10/why-teleportation-evil.png?resize=350%2C200',
+    name: 'Teleportation',
+    imageUrl: 'http://newdawnblog.com/wp-content/uploads/2016/09/469122042.jpg',
     category: 'mental',
     description: 'Power to teleport to a spot within your vision',
     price: 13400,
     count: 1
   },
   precognition: {
-    name: 'precognition',
+    name: 'Precognition',
     imageUrl: 'http://psychicbloggers.com/wp-content/uploads/2012/04/19815801.jpg',
     category: 'mental',
     description: 'Power to perceive future events.',
