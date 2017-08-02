@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+
 export const WhoAmI = ({ user, logout }) => (
   <div>
     <div className='whoami pull-right'>

@@ -32,6 +32,7 @@ export class Main extends Component {
                 return b.name > a.name
             })
         }
+
         return (
             <div>
                 <sidebar className='col-xs-2 sidebar-nav'>

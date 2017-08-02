@@ -3,8 +3,38 @@ $default-background: #2B303B;
 $darker-background: #303641;
 $active-font-folor: #D4D5D8;
 $active-background: #5294E2;
-
 body {
+  .signin-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: -webkit-min-content;
+  }
+  .signin-container>* {
+    width: 33%;
+  }
+  .signin-container .local {
+    max-width: 18em;
+    text-align: left;
+  }
+  .signin-container .or {
+    max-width: 10em;
+  }
+  .signin-container .oauth {
+    max-width: 18em;
+  }
+  .signin-container .btn-social {
+    text-align: center;
+    width: 100%;
+  }
+  @media (max-width: 600px) {
+    .signin-container {
+      flex-direction: column;
+    }
+    .signin-container>* {
+      width: 100%;
+    }
+  }
   height: 160vh;
   .navbarlink {
     font-weight: bold;
