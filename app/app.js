@@ -22,6 +22,7 @@ import { fetchProducts } from './reducers/product.jsx'
 import { fetchOrders } from './reducers/order.jsx'
 import { fetchUsers } from './reducers/users.jsx'
 import Signup from './components/Signup.jsx'
+import Cart from './components/Cart.jsx'
 
 class App extends Component {
   componentWillMount() {
@@ -49,22 +50,23 @@ class App extends Component {
           </div>
           <div className="container-fluid">
             <SearchBar />
-            <a href="/" className="btn btn-info btn-sm col-xs-1">
+            <a href="/cart" className="btn btn-info btn-sm col-xs-1">
               <span className="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
             </a>
           </div>
         </nav>
         <main>
-            <Switch>
-              <Route path='/products/:productId' component={SingleProduct} />
-              <Route path='/orders/:orderId' component={ProductsInOrder} />
-              <Route path='/orders' component={Orders} />
-              <Route path='/users/:usersId' component={User} />
-              <Route path='/users' component={AdminUsers} />
-              <Route path="/signup" component={Signup} />
-              <Route exact path="/" component={Main} />
-              <Route component={NotFound} />
-            </Switch>
+          <Switch>
+            <Route path='/products/:productId' component={SingleProduct} />
+            <Route exact path='/cart' component={Cart} />
+            <Route path='/orders/:orderId' component={ProductsInOrder} />
+            <Route path='/orders' component={Orders} />
+            <Route path='/users/:usersId' component={User} />
+            <Route path='/users' component={AdminUsers} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/" component={Main} />
+            <Route component={NotFound} />
+          </Switch>
         </main>
       </div>
     )

@@ -9,6 +9,7 @@ api
   .use('/reviews', require('./reviews'))
   .use('/products', require('./product'))
   .use('/orders', require('./order'))
+  .use('/cartItem', require('./cartItem'))
 
 // No routes matched? 404.
 api.use((req, res) => res.status(404).end())
